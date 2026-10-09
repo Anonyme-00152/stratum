@@ -13,7 +13,7 @@ from markupsafe import Markup
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src"
 OUT = ROOT / "site"
-SITE_URL = "https://stratum-markets.vercel.app"
+SITE_URL = "https://stratum-markets-blue.vercel.app"
 
 # --------------------------------------------------------------------------- icons
 _I = {
