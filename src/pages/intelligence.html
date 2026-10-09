@@ -1,0 +1,61 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Environmental market intelligence and data | Stratum{% endblock %}
+{% block description %}Price benchmarks, forward curves, country policy profiles, CORSIA forecasts and market dynamics — in one platform.{% endblock %}
+{% block canonical %}/intelligence.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('Intelligence', 'A competitive edge from <span class="serif">the latest market data</span>', 'Execute your environmental markets strategy with confidence. Unlock price benchmarks, policy analysis and market insight built from real transactions.', ('Start your free trial', '/contact-us.html'), ('Explore the data', '#data'), variant='dark', crumb='Market intelligence', seed=14) }}
+
+<section class="section" id="data">
+  <div class="container">
+    <div class="section-head section-head--row">
+      <div><span class="eyebrow">Pricing insights</span><h2 class="h2" data-split>See how the market is <span class="serif">actually moving</span></h2>
+      <p class="lead">85,000 pricing data points aggregated and anonymised from our own procurements. Benchmark any project against comparable credits by type, region, vintage and methodology.</p></div>
+    </div>
+    <div class="chart-card" data-chart data-reveal="scale">
+      <div class="chart-card__head">
+        <div><h3>Average price by project type</h3><p class="muted small">USD per tonne · monthly · 2023–2026</p></div>
+        <div class="chart-legend" role="group" aria-label="Toggle series">
+          {% for k, c in [('Nature-based removals', '#1f5a46'), ('Avoided deforestation', '#eaa43c'), ('Cookstoves', '#6aa0a8'), ('Renewable energy', '#a7c2a3')] %}
+          <button class="legend-btn" type="button" aria-pressed="true" style="--c:{{ c }}"><i></i>{{ k }}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="chart"></div>
+      <p class="chart-note">Illustrative data for demonstration. Live benchmarks are available in the Stratum platform.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Modules</span><h2 class="h2" data-split>Everything you need to navigate the market, <span class="serif">in one place</span></h2></div>
+    {{ m.feature_tabs('intel', [
+      {'tab': 'Pricing insights', 'eyebrow': 'Feature', 'title': 'Benchmarks grounded in real transactions', 'text': 'Whether you are buying, selling or advising, your decisions reflect how the market is actually moving — with vintage forward curves offering a data-based alternative to forecasts.', 'points': ['85,000 pricing data points', 'Vintage forward curves library', 'Comparable-credit benchmarking'], 'img': 'terraces'},
+      {'tab': 'Country policy profiles', 'eyebrow': 'Feature', 'title': 'Anticipate regulatory shifts before they move the market', 'text': 'In-depth profiles from policy risk and opportunity themes to Article 6 engagement, built from interviews with local legal and policy experts.', 'points': ['Article 6 readiness and authorisation', 'Policy risk and opportunity themes', 'Expert commentary on demand'], 'img': 'valley'},
+      {'tab': 'CORSIA', 'eyebrow': 'Feature', 'title': 'Aviation compliance with total confidence', 'text': 'Supply and demand forecasts across the First and Second Phase, regional and airline-specific analysis, and expert modelling as the scheme evolves.', 'points': ['Supply and demand to 2035', 'Airline-level demand mapping', 'Eligibility assessments'], 'img': 'clouds', 'link': ('Access CORSIA', '/corsia.html')},
+      {'tab': 'Market dynamics', 'eyebrow': 'Feature', 'title': 'Who is buying, what is moving, where the money goes', 'text': 'Track supply, demand and funding across the VCM, drawing on 600 million+ anonymised data points from our RFP platform and public registry data.', 'points': ['Retirements by buyer, type and sector', 'Supplier issuances and available volumes', 'Capital committed to future supply'], 'img': 'river', 'link': ('Read the launch post', '/blog/inside-market-dynamics.html')},
+    ]) }}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>Better decisions with a <span class="serif">clear view</span> of the market</h2><p class="lead">More data, deeper expertise and broader market experience than any single source can offer.</p></div>
+    {{ m.reasons([
+      ('users', 'Expert analysis behind every data point', 'Climate policy and market specialists are embedded in the platform, not just behind it. Forward curves are validated against live procurements, and you can consult an expert directly.'),
+      ('database', 'Proprietary data across the whole market', '85,000 price points, 18,000+ projects across 23 registries and 9,000 corporate retirees tracked per quarter — harmonised into one consistent dataset.'),
+      ('award', 'Grounded in real market experience', 'Analysts with 60+ years of combined VCM experience, who have facilitated hundreds of millions of dollars of procurement across every major project type.'),
+    ], cols=3) }}
+    <div class="mt-64">{{ m.stats([
+      {'n': 18000, 'suf': '+', 'label': 'Projects with automated risk screening'},
+      {'n': 85000, 'suf': '+', 'label': 'Pricing data points'},
+      {'n': 40, 'suf': '+', 'label': 'In-depth country policy reports'},
+    ], light=True) }}</div>
+  </div>
+</section>
+
+{{ m.insights('Featured insights', alt=True) }}
+{{ m.cta('Power your competitive edge in <span class="serif">carbon markets</span>', 'Talk to our experts and find out how Stratum\'s intelligence modules can support your strategy.', ('Start your free trial', '/contact-us.html')) }}
+{% endblock %}

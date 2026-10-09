@@ -1,0 +1,42 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Access qualified demand for your carbon projects | Stratum{% endblock %}
+{% block description %}Reach a global network of active buyers and investors through a structured, repeatable, conflict-free procurement engine.{% endblock %}
+{% block canonical %}/access-demand.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('Access demand', 'Scale your projects with <span class="serif">qualified demand</span>', 'Access our global network of active buyers and investors through a structured, repeatable, conflict-free procurement engine — so you can close deals faster and focus on impact.', ('Set up your profile', '/contact-us.html?role=developer'), ('How it works', '#how'), variant='photo', photo='farmer', crumb='Access demand') }}
+
+{{ m.logos() }}
+
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">For project developers</span><h2 class="h2" data-split>We handle the commercial process. <span class="serif">You focus on the impact.</span></h2></div>
+    {{ m.feature_tabs('demand', [
+      {'tab': 'Qualified buyers', 'eyebrow': 'Feature', 'title': 'Access a free sales channel', 'text': 'A global network of active buyers and investors, each with specific procurement criteria, managed through our award-winning platform. Join for free and stay in control of your sales, terms and strategy.', 'img': 'field', 'link': ('Create a free account', '/contact-us.html?role=developer')},
+      {'tab': 'Strategy support', 'eyebrow': 'Feature', 'title': 'Calibrate with transparent feedback', 'text': 'Most procurement is opaque. We built in a feedback loop that delivers structured insight after every RFP — from the number of submissions to pricing ranges and buyer preferences.', 'img': 'leaf', 'link': ('Get advisory', '/advisory.html')},
+      {'tab': 'Submission workflows', 'eyebrow': 'Feature', 'title': 'Scalable, repeatable workflows', 'text': 'Traditional RFPs are bespoke. We standardise submission frameworks with a multi-stage intake model, so each RFP you enter is faster and cheaper than the last.', 'img': 'seedling', 'link': ('Create a free account', '/contact-us.html?role=developer')},
+    ]) }}
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>We don't represent supply. <span class="serif" style="color:var(--lime)">We represent the market.</span></h2><p class="lead">We sign procurement mandates with corporate buyers before supply is sourced — so when your project receives an invitation, there's committed capital behind it.</p></div>
+    {{ m.reasons([
+      ('award', 'A track record with corporate buyers', '55mn+ tonnes transacted on behalf of 200+ corporate buyers. Every RFP you enter is backed by a qualified buyer with intent to invest.'),
+      ('scale', 'Incentives aligned with yours', 'We are not paid by suppliers and hold no inventory, so buyers trust our recommendations — and the best projects win on merit.'),
+      ('lock', 'No commitments required', 'No exclusivity, no long-term contracts. We work with you when we have qualified demand for your projects.'),
+    ], cols=3) }}
+    <div class="mt-64">{{ m.stats([
+      {'n': 9000, 'suf': '+', 'label': 'Corporate retirees tracked per quarter'},
+      {'pre': '$', 'n': 100, 'suf': 'mn', 'label': 'Capital deployed'},
+      {'n': 55, 'suf': 'mn', 'label': 'Tonnes transacted'},
+    ]) }}</div>
+  </div>
+</section>
+
+{{ m.quotes(['canopia', 'bloom', 'greenfield']) }}
+{{ m.insights() }}
+{{ m.cta('Access qualified buyers <span class="serif">today</span>', 'Create a free account and submit your projects to real, committed buyers.', ('Create a free account', '/contact-us.html?role=developer'), points=['Free to join, no exclusivity', 'Invitations backed by signed mandates', 'Structured feedback after every RFP']) }}
+{% endblock %}

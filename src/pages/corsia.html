@@ -1,0 +1,85 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}CORSIA compliance for airlines | Stratum{% endblock %}
+{% block description %}Data, undiscovered supply and procurement expertise to help airlines meet CORSIA obligations with confidence.{% endblock %}
+{% block canonical %}/corsia.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('CORSIA', 'CORSIA compliance, <span class="serif">without the turbulence</span>', 'CORSIA is becoming one of the largest compliance carbon markets in the world. Stratum gives airlines the data, supply access and procurement expertise to meet obligations with confidence.', ('Get started', '/contact-us.html?role=buyer'), ('Our CORSIA forecast', '#forecast'), variant='photo', photo='clouds', crumb='CORSIA') }}
+
+{{ m.logos() }}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">How Stratum helps</span><h2 class="h2" data-split>Move from obligation <span class="serif">to action</span></h2><p class="lead">Airlines that move early stand to benefit most. We combine procurement, advisory and intelligence so you can secure eligible supply and shape a clear strategy.</p></div>
+    {{ m.feature_tabs('corsia', [
+      {'tab': 'Procurement', 'eyebrow': 'Procure eligible credits', 'title': 'A market-wide process for CORSIA-eligible supply', 'text': 'Sourcing, evaluation and contracting in one platform covering 5,000 developers and 18,000+ projects, with portfolios structured around contract guarantees that safeguard delivery.', 'points': ['The Stratum edge: CORSIA transactions already closed for airlines pursuing First Phase compliance'], 'img': 'sky', 'link': ('Run a CORSIA RFP', '/procurement.html')},
+      {'tab': 'Advisory', 'eyebrow': 'Develop your strategy', 'title': 'Deep CORSIA and Article 6 expertise for your team', 'text': 'From country-specific policy analysis to credit structuring and financing, our advisors draw on policy, legal and market experience across carbon and aviation.', 'points': ['The Stratum edge: a member of CORSIA\'s Technical Advisory Body with 20+ years on the subject'], 'img': 'mountains', 'link': ('Explore advisory', '/advisory.html')},
+      {'tab': 'Intelligence', 'eyebrow': 'Understand the market', 'title': 'Full visibility of today\'s and tomorrow\'s CORSIA landscape', 'text': 'Supply forecasts, airline-specific demand projections, country policy profiles and eligibility assessments — all in one place.', 'points': ['The Stratum edge: a proprietary forecast modelling supply and demand to 2035 at airline and regional level'], 'img': 'clouds', 'link': ('Access intelligence', '/intelligence.html')},
+    ]) }}
+  </div>
+</section>
+
+<section class="section section--dark" id="forecast">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">CORSIA forecast</span>
+        <h2 class="h2 mt-16" data-split>See where eligible supply tightens — <span class="serif" style="color:var(--lime)">before it does</span></h2>
+        <p class="lead mt-24">Our model maps demand route by route and airline by airline, against a bottom-up view of eligible supply including host-country authorisation.</p>
+        <div class="mt-32">{{ m.stats([
+          {'n': 193, 'label': 'ICAO member states in our demand model'},
+          {'n': 13000, 'suf': '+', 'label': 'International routes analysed to forecast airline-level demand'},
+          {'n': 220, 'label': 'Individual airline demand requirements mapped'},
+        ]) }}</div>
+      </div>
+      <div class="chart-card" style="background:rgba(238,240,230,.04);border-color:var(--line-dark);box-shadow:none" data-reveal="scale">
+        <div class="chart-card__head"><div><h3 style="color:var(--on-dark)">Phase 1 supply vs demand</h3><p class="small" style="color:var(--on-dark-2)">Million eligible units · illustrative</p></div></div>
+        <svg viewBox="0 0 420 240" role="img" aria-label="Illustrative bar chart: demand rises above eligible supply by 2027">
+          {% for yr, d, s in [('2024', 40, 22), ('2025', 70, 38), ('2026', 105, 60), ('2027', 140, 84)] %}
+          {% set x = loop.index0 * 100 + 20 %}
+          <rect x="{{ x }}" y="{{ 200 - d }}" width="30" height="{{ d }}" rx="6" fill="#eaa43c"/>
+          <rect x="{{ x + 36 }}" y="{{ 200 - s }}" width="30" height="{{ s }}" rx="6" fill="#a7c2a3"/>
+          <text x="{{ x + 33 }}" y="222" text-anchor="middle" font-family="JetBrains Mono" font-size="11" fill="rgba(238,240,230,.6)">{{ yr }}</text>
+          {% endfor %}
+          <line x1="10" x2="410" y1="200" y2="200" stroke="rgba(238,240,230,.15)"/>
+        </svg>
+        <div class="chart-legend mt-16"><span class="legend-btn" style="--c:#eaa43c;color:var(--on-dark);border-color:var(--line-dark)"><i></i>Demand</span><span class="legend-btn" style="--c:#a7c2a3;color:var(--on-dark);border-color:var(--line-dark)"><i></i>Eligible supply</span></div>
+        <p class="chart-note" style="color:var(--on-dark-2)">Illustrative only. Request the forecast for current figures.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split split--top">
+      <div>
+        <span class="eyebrow">Two-level eligibility</span>
+        <h2 class="h2 mt-16" data-split>A credit only counts if <span class="serif">both levels</span> pass. We assess both.</h2>
+        <p class="lead mt-24">Our funnel approach screens each eligibility criterion separately, so you can prioritise the projects most likely to qualify.</p>
+      </div>
+      <div class="grid" style="gap:14px" data-stagger>
+        {% for n, t, d in [
+          ('01', 'Programme & vintage', 'Is the project issued under an ICAO-approved programme, with an eligible vintage and methodology?'),
+          ('02', 'Host-country authorisation', 'Has the host country issued a Letter of Authorisation and committed to a corresponding adjustment?'),
+          ('03', 'Guarantee & insurance', 'Is the unit protected against double-counting and authorisation revocation?'),
+          ('04', 'Delivery risk', 'Can the developer deliver the volume in time for your compliance deadline?'),
+        ] %}
+        <div class="card" style="display:flex;gap:18px;align-items:flex-start;padding:22px"><span class="mono" style="color:var(--amber-ink);font-size:14px">{{ n }}</span><div><h4>{{ t }}</h4><p class="muted mt-8" style="font-size:15.5px">{{ d }}</p></div></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">People</span><h2 class="h2" data-split>Our expert <span class="serif">CORSIA team</span></h2></div>
+    {{ m.team(['rafael', 'aisha', 'anika', 'olu', 'mateo', 'zofia'], cols=3) }}
+  </div>
+</section>
+
+{{ m.insights('CORSIA insights') }}
+{{ m.cta('Get ahead of your <span class="serif">CORSIA obligations</span>', 'Speak with our CORSIA specialists about supply, pricing and eligibility for your airline.') }}
+{% endblock %}

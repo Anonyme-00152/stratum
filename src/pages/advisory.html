@@ -1,0 +1,53 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Carbon strategy and advisory | Stratum{% endblock %}
+{% block description %}Practical, evidence-based carbon market advice from experts who understand your commercial goals and act as an extension of your team.{% endblock %}
+{% block canonical %}/advisory.html{% endblock %}
+{% block content %}
+{{ m.page_hero('Strategic advisory', 'Smarter carbon decisions, <span class="serif">backed by science</span>', 'Stay ahead of market shifts with practical, evidence-based advice delivered by experts who understand your commercial goals and act as an extension of your team.', ('Get started', '/contact-us.html'), ('Meet the team', '#team'), crumb='Build your strategy', seed=6) }}
+
+{{ m.logos() }}
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Solutions</span><h2 class="h2" data-split>A competitive edge, tailored to <span class="serif">your challenges</span></h2></div>
+    <div class="bento" data-stagger=".07">
+      {% for ic, t, d, span, dark in [
+        ('compass', 'Carbon procurement strategy', 'Decide what to buy and when — balancing spot purchases against forwards and offtakes — so procurement secures supply, manages price risk and holds up against your climate targets.', 'span-4', True),
+        ('leaf', 'Insetting', 'Identify and invest in high-impact EAC and carbon projects within your value chain to address Scope 3 emissions, with supply chain and geospatial expertise.', '', False),
+        ('plane', 'CORSIA', 'Cut through complexity with a scalable strategy for aviation compliance, from in-house experts with first-hand experience of the scheme.', '', False),
+        ('coins', 'Pricing and portfolio valuation', 'Assess the true quality and financial value of your portfolio with scientific and financial analysis backed by real market data.', '', False),
+        ('sprout', 'Technical strategy support', 'Methodology choice, project structuring, capital raising and market access for developers — and the same rigour for buyers assessing delivery risk.', '', False),
+        ('file', 'Reporting support', 'Turn climate action into a credible story: expert-backed claims, narratives and disclosure support that hold up with consumers, regulators and boards.', 'span-6', False),
+      ] %}
+      <div class="tile {{ span }}{% if dark %} tile--dark{% endif %}">
+        <span class="ico{% if dark %} ico--dark{% endif %}" {% if dark %}style="background:rgba(212,234,124,.14)"{% endif %}>{{ icon(ic) }}</span>
+        <h3 class="mt-24">{{ t }}</h3>
+        <p>{{ d }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">People</span><h2 class="h2" data-split>Our <span class="serif">expert team</span></h2><p class="lead">Deep environmental market expertise paired with proprietary tools and data. We have published research alongside the City of London, the ASEAN Alliance on Carbon Markets and the International Platform for Insetting.</p></div>
+    {{ m.team(['marcus', 'rafael', 'aisha', 'liam', 'mateo', 'zofia', 'lucia', 'anika']) }}
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>Rigorous guidance your leadership <span class="serif" style="color:var(--lime)">can defend</span></h2><p class="lead">We translate complex market dynamics into clear commercial steps — and give you the analysis and narrative to hold every decision up to scrutiny.</p></div>
+    {{ m.reasons([
+      ('award', 'Unmatched market expertise', '70+ years of combined experience across policy, regulation, finance, advisory, data and technical analysis.'),
+      ('scale', 'Truly independent advice', 'No inventory and no developer commissions. We are accountable only to you.'),
+      ('database', 'Grounded in real data', 'Every recommendation draws on the same proprietary database that powers our platform.'),
+    ], cols=3) }}
+  </div>
+</section>
+
+{{ m.insights('Featured insights', 'report', eyebrow='Research') }}
+{{ m.cta('Build a strategy that <span class="serif">holds up</span>', 'Tell us about your targets and constraints. We will come back with a clear view of the options — and the trade-offs.') }}
+{% endblock %}

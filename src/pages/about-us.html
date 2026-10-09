@@ -1,0 +1,88 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}About Stratum — climate and environmental market experts{% endblock %}
+{% block description %}Our mission is to empower every organisation to build a thriving future for climate, nature and people.{% endblock %}
+{% block canonical %}/about-us.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('About us', 'We work on some of the most critical <span class="serif">challenges on Earth</span>', 'Climate, nature and people — and the markets that fund them. We built Stratum so no organisation has to navigate those markets alone.', ('Meet the team', '#team'), ('Talk to us', '/contact-us.html'), variant='photo', photo='valley', crumb='About') }}
+
+<section class="section">
+  <div class="container container--narrow center">
+    <span class="eyebrow">Our mission</span>
+    <p class="h2 mt-24" data-split style="font-weight:500">To empower every organisation to build a <span class="serif">thriving future</span> for climate, nature, and people.</p>
+  </div>
+  <div class="container mt-64">
+    <div class="grid grid-3" data-stagger>
+      <div class="card"><span class="ico">{{ icon('shield') }}</span><h3>Conflict-free by design</h3><p>No inventory, no developer fees. We hold ourselves to the standards we set for the market.</p></div>
+      <div class="card"><span class="ico ico--amber">{{ icon('trending') }}</span><h3>Backed by climate investors</h3><p>Funded by investors who share our long-term view of environmental markets.</p></div>
+      <div class="card"><span class="ico">{{ icon('award') }}</span><h3>Science-led</h3><p>Every recommendation is grounded in peer-reviewed methods and real transaction data.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Why we built Stratum</span>
+        <h2 class="h2 mt-16" data-split>Billions of dollars. <span class="serif">Too few who can navigate them.</span></h2>
+        <div class="prose mt-24">
+          <p class="lead">Environmental markets channel billions of dollars toward forest protection, clean energy and community development in the places that need it most. The problem is that navigating them requires deep expertise, proprietary data and relationships that take years to build.</p>
+          <p>We built Stratum so organisations don't have to navigate this alone. Our platform, our intelligence and our team sit at the centre of the market. We help buyers procure with confidence, investors find opportunities, and developers get their projects to the right buyers.</p>
+        </div>
+      </div>
+      <div class="media-frame media-frame--tall" data-reveal="scale"><img src="/img/tree.webp" alt="An ancient tree in a dense forest" loading="lazy" data-parallax></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">How we work</span><h2 class="h2" data-split>Principles we <span class="serif">won't trade</span></h2></div>
+    {{ m.feature_tabs('how', [
+      {'tab': 'Real-world impact', 'eyebrow': 'How we work', 'title': 'More capital for real-world impact', 'text': 'Our transparent commercial model channels more investment directly to the project developers implementing environmental solutions on the ground.', 'img': 'farmer'},
+      {'tab': 'Transparency', 'eyebrow': 'How we work', 'title': 'Transparency as a competitive advantage', 'text': 'We do not hold inventory. We do not represent any project. We act in our clients\' interests — and we can prove it.', 'img': 'lake'},
+      {'tab': 'Expert team', 'eyebrow': 'How we work', 'title': 'An expert team that gives a damn', 'text': 'We work hard to educate and elevate the market. Our conviction shapes every product decision, every recommendation, every hire.', 'img': 'forest'},
+    ]) }}
+  </div>
+</section>
+
+<section class="section section--alt" id="team">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Leadership</span><h2 class="h2" data-split>The people <span class="serif">behind Stratum</span></h2><p class="lead">Expertise across climate science, policy, carbon markets, product and operations — built across some of the most complex institutions and companies in the world.</p></div>
+    {{ m.team(['elena', 'marcus', 'ines', 'rafael', 'noah', 'yara', 'chloe', 'kenji']) }}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">In their words</span><h2 class="h2" data-split>Partners, <span class="serif">not vendors</span></h2></div>
+    <div class="quote-grid" data-reveal>
+      {% for k in ['northwind', 'velo', 'halcyon', 'greenfield', 'bloom', 'meridian', 'lumen', 'canopia'] %}{% set t = T[k] %}
+      <figure class="quote-card">
+        <span class="co">{{ t.co }} × Stratum</span>
+        <p>“{{ t.q }}”</p>
+        <figcaption class="quote__by"><span class="avatar" aria-hidden="true">{{ initials(t.name) }}</span><span><strong>{{ t.name }}</strong><span>{{ t.role }}</span></span></figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark" id="emissions">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Our emissions</span>
+        <h2 class="h2 mt-16" data-split>We practise <span class="serif" style="color:var(--lime)">what we procure</span></h2>
+        <p class="lead mt-24">As a purpose-led company, we measure our own footprint, cut what we can, and address the rest through the same rigorous, conflict-free process we run for clients.</p>
+        <a class="btn btn--light mt-32" href="/contact-us.html">Request our emissions statement {{ icon('arrow') }}</a>
+      </div>
+      <div class="media-frame media-frame--wide" data-reveal="scale"><img src="/img/canopy.webp" alt="Aerial view of a forest canopy" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+{{ m.cta('Start building your <span class="serif">operating edge</span> today', 'Whatever your role in environmental markets, we\'d love to hear what you\'re working on.', ('Talk to us', '/contact-us.html'), ('Explore the platform', '/platform.html')) }}
+{% endblock %}

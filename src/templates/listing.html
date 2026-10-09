@@ -1,0 +1,42 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% set intro = {
+  'blog': ('Blog', 'Analysis, news and <span class="serif">market notes</span>', 'Our analysts and policy experts on what is moving in carbon and environmental markets — and what it means for your portfolio.'),
+  'case-study': ('Customer stories', 'Results our clients <span class="serif">can defend</span>', 'How airlines, insurers, investors and global brands use Stratum to source, evaluate and contract high-integrity environmental assets.'),
+  'report': ('Reports', 'In-depth research for <span class="serif">better decisions</span>', 'Guides, white papers and market reports from the Stratum research team. Free to download.'),
+}[kind] %}
+{% block title %}{{ meta.plural }} | Stratum{% endblock %}
+{% block description %}{{ intro[2] }}{% endblock %}
+{% block canonical %}/{{ meta.dir }}/{% endblock %}
+{% block content %}
+{{ m.page_hero(intro[0], intro[1], intro[2], crumb=meta.plural, seed=kind|length) }}
+
+<section class="section section--flush-top" data-filter>
+  <div class="container">
+    {% if items %}<div class="mb-48" style="margin-bottom:48px" data-reveal>{{ m.post_card(items[0], feature=True) }}</div>{% endif %}
+    {% set topics = [('all', 'All'), ('strategy', 'Strategy'), ('pricing', 'Pricing & data'), ('policy', 'Policy & claims'), ('corsia', 'CORSIA')] %}
+    <div class="filters">
+      <div class="chips" role="group" aria-label="Filter by topic">
+        {% for v, l in topics %}<button class="chip" type="button" data-value="{{ v }}" aria-pressed="{{ 'true' if v == 'all' else 'false' }}">{{ l }}</button>{% endfor %}
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <span class="mono muted" data-count-out aria-live="polite"></span>
+        <label class="search"><span class="sr-only">Search {{ meta.plural|lower }}</span>{{ icon('search') }}<input type="search" placeholder="Search {{ meta.plural|lower }}…"></label>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      {% for a in items[1:] %}{{ m.post_card(a) }}{% endfor %}
+    </div>
+    <p class="empty" hidden>No results match your filters. Try another topic or search term.</p>
+  </div>
+</section>
+
+{{ m.cta('Turn insight into a <span class="serif">portfolio</span>', 'Our team can apply this research to your programme — from strategy through to contracting.') }}
+{% endblock %}
+{% block scripts %}
+<script>
+/* Listing uses topic filters rather than kind */
+document.querySelectorAll('[data-filter] [data-cat]').forEach(function (el) { el.dataset.cat = el.dataset.topic; });
+document.querySelectorAll('.post--feature').forEach(function (el) { el.removeAttribute('data-cat'); });
+</script>
+{% endblock %}

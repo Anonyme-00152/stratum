@@ -1,0 +1,160 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Stratum — Environmental asset procurement and intelligence{% endblock %}
+{% block description %}The operating system for environmental markets. Structured procurement, independent advisory and real-time intelligence for ambitious organisations.{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero__topo"><canvas data-topo="light" data-seed="4"></canvas></div>
+  <div class="hero__fade"></div>
+  <div class="container">
+    <div class="hero__grid">
+      <div>
+        {% set md = by_kind['blog'][0] %}
+        <a class="badge-pill" href="{{ md.url }}" data-reveal><b>NEW</b> Inside Market Dynamics {{ icon('arrow') }}</a>
+        <h1 data-split>The operating system for <span class="serif">environmental markets</span></h1>
+        <p class="lead" data-reveal style="--d:.3s">Structured procurement, independent advisory and real-time intelligence for ambitious organisations — so every tonne you buy is the right one, at the right price.</p>
+        <div class="btn-row" data-reveal style="--d:.4s">
+          <a class="btn btn--lg" href="/contact-us.html">Talk to the team {{ icon('arrow') }}</a>
+          <a class="btn btn--lg btn--ghost" href="/platform.html">Explore the platform</a>
+        </div>
+        <div class="hero__meta" data-reveal style="--d:.5s">
+          <span>{{ icon('award') }} Product Innovation of the Year</span>
+          <span>{{ icon('shield') }} Conflict-free by design</span>
+          <span>{{ icon('zap') }} 18,000+ projects tracked</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal="scale" style="--d:.2s">
+        <div class="mock" data-live-rfp>
+          <div class="mock__bar"><span class="mock__dots"><i></i><i></i><i></i></span><span class="mock__url">app.stratum.markets/rfp/nbs-removals-26</span></div>
+          <div class="mock__body">
+            <div class="mock__head">
+              <div><h4>Nature-based removals RFP · 2026</h4><p>250,000 tCO₂e · 2026–2030 offtake · 6 criteria</p></div>
+              <span class="status">Live</span>
+            </div>
+            <div class="kpis">
+              <div class="kpi"><small>Proposals</small><b data-k="bids">87</b><em>+12 today</em></div>
+              <div class="kpi"><small>Avg. price / t</small><b data-k="avg">$27.4</b><em>vs $34.9 mkt</em></div>
+              <div class="kpi"><small>Est. savings</small><b data-k="save">21.4%</b><em>vs bilateral</em></div>
+            </div>
+            <ul class="bids" role="list" aria-label="Latest proposals"></ul>
+          </div>
+        </div>
+        <div class="mock__float float-1" aria-hidden="true">
+          <svg class="ring" viewBox="0 0 44 44"><circle class="bg" cx="22" cy="22" r="18" stroke="#ece7da" stroke-width="4" fill="none"/><circle class="fg" cx="22" cy="22" r="18" stroke="#4e7a5e" stroke-width="4" fill="none" stroke-dasharray="113" stroke-dashoffset="20" stroke-linecap="round" transform="rotate(-90 22 22)"/></svg>
+          <div><b style="display:block;font-size:15px">Due diligence passed</b><span class="muted" style="font-size:12.5px">5 / 5 risk pillars · Level 2</span></div>
+        </div>
+        <div class="mock__float float-2" aria-hidden="true">
+          <span class="mono muted">GEO SCREEN</span>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:4px"><span class="dot-live"></span><b>No deforestation since 2015</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ m.logos() }}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Why it matters</span>
+      <h2 class="h2" data-split>Optimise the cost, risk and impact of your entire environmental portfolio</h2>
+    </div>
+    <div class="pillars" data-stagger>
+      <div class="pillar"><span class="ico">{{ icon('target') }}</span><h3>Source the right assets</h3><p>Reach the whole market across registries and project types — and buy at the best price through genuine competition.</p></div>
+      <div class="pillar"><span class="ico ico--amber">{{ icon('shield') }}</span><h3>Mitigate every risk</h3><p>Independent, conflict-free advice and expert, always-on support, with tiered due diligence built in.</p></div>
+      <div class="pillar"><span class="ico">{{ icon('portfolio') }}</span><h3>Manage the full lifecycle</h3><p>Run your entire portfolio from first purchase to retirement and beyond, with delivery tracked in one place.</p></div>
+      <div class="pillar"><span class="ico">{{ icon('trending') }}</span><h3>Stay ahead of the market</h3><p>Pricing benchmarks, policy shifts and supply signals — the latest data and insight as markets evolve.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head section-head--row">
+      <div>
+        <span class="eyebrow">The Stratum Platform</span>
+        <h2 class="h2" data-split>Procurement, intelligence and portfolio management in <span class="serif">one system</span></h2>
+        <p class="lead">Run competitive RFPs across the global supplier network, track delivery milestones and policy shifts, and manage your entire portfolio from first purchase to retirement — and beyond.</p>
+      </div>
+      <a class="btn btn--ghost" href="/platform.html">Explore the platform {{ icon('arrow') }}</a>
+    </div>
+
+    <div class="bento" data-stagger=".07">
+      <a class="tile span-4" href="/procurement.html">
+        <span class="tag">Buyers Hub</span>
+        <h3 class="mt-16">Structured RFPs that reach 1,300+ suppliers</h3>
+        <p>Standardised submissions, comparable proposals and a dashboard you can filter, sort and export.</p>
+        <div class="tile__visual">
+          <svg viewBox="0 0 560 140" role="img" aria-label="Proposal funnel: 1,312 invited, 412 eligible, 87 shortlisted, 9 contracted">
+            {% set f = [('Invited', 1312, 540), ('Eligible', 412, 400), ('Shortlisted', 87, 250), ('Contracted', 9, 120)] %}
+            {% for label, n, w in f %}
+            <g transform="translate(0,{{ loop.index0 * 34 }})">
+              <rect x="0" y="4" width="{{ w }}" height="24" rx="7" fill="{{ ['#d7e3d2','#a7c2a3','#4e7a5e','#0f3329'][loop.index0] }}"/>
+              <text x="12" y="21" font-family="JetBrains Mono, monospace" font-size="12" fill="{{ '#102720' if loop.index0 < 2 else '#eef0e6' }}">{{ label }} · {{ '{:,}'.format(n) }}</text>
+            </g>
+            {% endfor %}
+          </svg>
+        </div>
+      </a>
+      <a class="tile tile--dark" href="/intelligence.html">
+        <span class="tag tag--dark">Intelligence</span>
+        <h3 class="mt-16">85,000 pricing data points</h3>
+        <p>Benchmarks by type, region, vintage and methodology.</p>
+        <div class="tile__visual">
+          <svg viewBox="0 0 240 80" aria-hidden="true"><path d="M0 62 C20 58 30 66 50 52 S80 40 100 44 130 28 150 30 180 14 200 18 230 8 240 6" fill="none" stroke="#d4ea7c" stroke-width="2.5" stroke-linecap="round"/><path d="M0 70 C30 68 50 72 80 64 S130 60 160 56 210 50 240 48" fill="none" stroke="#a7c2a3" stroke-width="2" stroke-dasharray="4 5" stroke-linecap="round"/></svg>
+        </div>
+      </a>
+      <div class="tile tile--photo span-3">
+        <img src="/img/mangrove-sm.webp" alt="Mangrove roots in clear water" loading="lazy" width="800" height="533">
+        <span class="tag tag--dark" style="align-self:flex-start;margin-bottom:auto">18,000+ projects tracked</span>
+        <h3>Every project, screened from orbit to ledger</h3>
+        <p>Automated geospatial checks validate what's on paper against what's on the ground.</p>
+      </div>
+      <a class="tile span-3" href="/due-diligence.html">
+        <span class="tag">Due diligence</span>
+        <h3 class="mt-16">Five risk pillars, three levels of depth</h3>
+        <div class="tile__visual meter">
+          {% for k, v, warn in [('Project quality', 86, 0), ('Methodology', 78, 0), ('Policy environment', 54, 1), ('Developer record', 91, 0), ('Market conditions', 69, 0)] %}
+          <div class="meter__row"><span>{{ k }}</span><span class="meter__bar"><i style="--w:{{ v }}%"{% if warn %} class="warn"{% endif %}></i></span><b>{{ v }}</b></div>
+          {% endfor %}
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="hero__topo" style="opacity:.6"><canvas data-topo="dark" data-seed="12" data-levels="10"></canvas></div>
+  <div class="container" style="position:relative">
+    <div class="section-head">
+      <span class="eyebrow">Why climate leaders trust us</span>
+      <h2 class="h2" data-split>An ethos grounded in partnership, <span class="serif" style="color:var(--lime)">built around demand.</span></h2>
+      <p class="lead">Better for buyers, better for developers, better for the market. Our clients consistently achieve better pricing, better supply quality, and more confidence in every decision they make.</p>
+    </div>
+    {{ m.reasons([
+      ('handshake', 'One partner, all your needs', 'A single contracting relationship across suppliers in the market. No fragmented negotiations, no parallel discussions inflating prices — just undiscovered supply you won\'t find through bilateral relationships.'),
+      ('scale', 'Expert, conflict-free advice built on data', 'Deep market knowledge, proprietary data and a commercial model without competing interests. Our compensation is separated from what you pay, so we negotiate for you, not our margin.'),
+      ('shield', 'Full-cycle, rigorous risk support', 'Strategy, sourcing, due diligence, contracting and monitoring — including defined replacement mechanisms and always-on portfolio oversight from day one.'),
+      ('users', 'A dedicated partner, accountable for outcomes', 'Shared accountability, institutional knowledge of your portfolio, and the kind of candour that only comes with an unbiased, long-term approach.'),
+    ]) }}
+    <div class="mt-64">
+      {{ m.stats([
+        {'n': 1.3, 'dec': 1, 'suf': 'bn', 'label': 'Tonnes of credits sourced for companies'},
+        {'n': 55, 'suf': 'mn', 'label': 'Tonnes of credits transacted'},
+        {'n': 200, 'suf': '+', 'label': 'Companies supported'},
+        {'n': 18000, 'suf': '+', 'label': 'Projects tracked and analysed'},
+        {'n': 20, 'suf': '%+', 'label': 'Average cost savings working with Stratum'},
+      ]) }}
+    </div>
+  </div>
+</section>
+
+{{ m.quotes(['northwind', 'meridian', 'halcyon', 'canopia', 'lumen'], title='Trusted by organisations that <span class="serif">move markets</span>') }}
+
+{{ m.insights() }}
+
+{{ m.cta('Start building your <span class="serif">operating edge</span> today', 'Tell us where you are — first purchase, a multi-year offtake, or compliance under CORSIA — and we will show you the fastest route to a defensible portfolio.') }}
+{% endblock %}

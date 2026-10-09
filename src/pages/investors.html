@@ -1,0 +1,48 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Carbon market intelligence and access for investors | Stratum{% endblock %}
+{% block description %}Intelligence, access and advisory support to build, evaluate and manage high-quality environmental portfolios that generate returns.{% endblock %}
+{% block canonical %}/investors.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('For investors', 'Higher ROI with <span class="serif">investment-grade insight</span>', 'The intelligence, access and advisory support to build, evaluate and manage high-quality portfolios that generate returns.', ('Get started', '/contact-us.html?role=investor'), ('Explore solutions', '#solutions'), variant='dark', crumb='Investors', seed=17) }}
+
+<section class="section--tight" style="padding-bottom:0">
+  <div class="container">{{ m.stats([
+    {'n': 3, 'suf': 'x', 'label': 'ROI on investment portfolios'},
+    {'n': 30, 'suf': '+', 'label': 'Hours saved per due diligence report'},
+    {'n': 1300, 'suf': '+', 'label': 'Active suppliers on our platform'},
+  ], light=True) }}</div>
+</section>
+
+{{ m.logos() }}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>Build, evaluate and manage portfolios <span class="serif">with confidence</span></h2><p class="lead">Built to complement your existing process, not replace it — from sourcing campaigns and due diligence to ongoing intelligence.</p></div>
+    {{ m.reasons([
+      ('scale', 'Independent analysis your IC can trust', 'From removal strategy and CORSIA to due diligence, valuation and transition reporting — rigorous advice from screening to exit, without coordinating multiple specialist firms.'),
+      ('globe', 'The largest marketplace connecting demand and supply', '1,300+ registered suppliers and institutional mandates give you visibility into where supply is emerging and where credible opportunities form — before the broader market.'),
+      ('database', 'Comprehensive data for better decisions', 'Benchmarks from 80,000+ real price points, project risk scores, country policy assessments and CORSIA forecasts — structured and continuously updated.'),
+      ('zap', 'Dynamic tools that scale', 'Intelligence, geospatial eligibility screening, proponent track records and portfolio monitoring in an award-winning platform.'),
+    ]) }}
+  </div>
+</section>
+
+<section class="section section--alt" id="solutions">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Solutions</span><h2 class="h2" data-split>Tools and expertise for the <span class="serif">full investment lifecycle</span></h2></div>
+    {{ m.feature_tabs('inv', [
+      {'tab': 'Advisory', 'title': 'Diversify and strengthen your strategy', 'text': 'Live market data and 60+ years of cumulative VCM expertise to identify opportunities, structure investments and build portfolios that last.', 'img': 'mountains', 'link': ('Advisory support', '/advisory.html')},
+      {'tab': 'Sourcing', 'title': 'Source investment opportunities', 'text': 'Run a sourcing campaign across our developer network and receive structured, comparable opportunities that match your thesis.', 'img': 'terraces', 'link': ('Run a sourcing campaign', '/procurement.html')},
+      {'tab': 'Demand', 'title': 'Access qualified demand', 'text': 'Connect the projects you back to corporate buyers with signed procurement mandates — de-risking offtake for your portfolio.', 'img': 'field', 'link': ('Access demand', '/access-demand.html')},
+      {'tab': 'Due diligence', 'title': 'De-risk with third-party due diligence', 'text': 'Depth that scales with the transaction, from automated screening to advanced on-site assessment for long-term offtakes and direct investments.', 'img': 'forest', 'link': ('Bolster your due diligence', '/due-diligence.html')},
+      {'tab': 'Intelligence', 'title': 'Get ahead of market developments', 'text': 'Pricing benchmarks, policy tracking, vintage forward curves and market insight in one unified view — replacing the usual tangle of sources and spreadsheets.', 'img': 'coast', 'link': ('Access intelligence', '/intelligence.html')},
+    ]) }}
+  </div>
+</section>
+
+{{ m.quotes(['meridian', 'halcyon', 'greenfield'], dark=True) }}
+{{ m.insights('Featured insights') }}
+{{ m.cta('Deploy faster, <span class="serif">scale further</span>', 'Talk to our team about sourcing, diligence and intelligence for your next investment.', ('Talk to our team', '/contact-us.html?role=investor')) }}
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Carbon project due diligence | Stratum{% endblock %}
+{% block description %}Automated screening, analyst-led due diligence and geospatial insight for an objective view of risk on every project you evaluate.{% endblock %}
+{% block canonical %}/due-diligence.html{% endblock %}
+{% block content %}
+{% set aside %}
+<div class="mock" style="max-width:460px;margin-left:auto">
+  <div class="mock__bar"><span class="mock__dots"><i></i><i></i><i></i></span><span class="mock__url">Risk report · VCS-2417</span></div>
+  <div class="mock__body">
+    <div class="mock__head"><div><h4>Mangrove restoration, Sumatra</h4><p>Level 2 · Analyst-led review</p></div><span class="status">Passed</span></div>
+    <div class="meter">
+      {% for k, v, warn in [('Project quality', 88, 0), ('Methodology', 81, 0), ('Policy environment', 57, 1), ('Developer track record', 92, 0), ('Market conditions', 73, 0)] %}
+      <div class="meter__row"><span>{{ k }}</span><span class="meter__bar"><i style="--w:{{ v }}%"{% if warn %} class="warn"{% endif %}></i></span><b>{{ v }}</b></div>
+      {% endfor %}
+    </div>
+    <div class="kpi" style="display:flex;gap:10px;align-items:center"><span class="dot-live"></span><span style="font-size:13px"><b>Geo screen:</b> no deforestation detected in baseline area since 2015</span></div>
+  </div>
+</div>
+{% endset %}
+{{ m.page_hero('Due diligence', 'Derisk your portfolio with <span class="serif">multi-level</span> due diligence', 'Automated screening, analyst-led reviews and geospatial insight give you a deep, objective view of risk — third-party assurance calibrated to your programme.', ('Get started', '/contact-us.html'), ('Compare levels', '#levels'), crumb='Conduct due diligence', aside=aside, seed=8) }}
+
+{{ m.logos() }}
+
+<section class="section section--alt" id="levels">
+  <div class="container">
+    <div class="section-head center"><span class="eyebrow">Tiered to your risk appetite</span><h2 class="h2" data-split>Match the depth of analysis to <span class="serif">the deal</span></h2></div>
+    <div class="grid grid-4" data-stagger>
+      {% for lvl, ic, t, d, use, time, feat in [
+        ('Level 1', 'zap', 'Automated screening', 'Screen hundreds of projects quickly to see which meet your specific requirements.', ['Project shortlisting', 'Ratings & reputation flags'], 'Available immediately', False),
+        ('Level 2', 'shield', 'Due diligence', 'Analyst-led review across five pillars: project quality, methodology, policy, developer track record and market conditions.', ['Spot purchases', 'Standard transactions'], 'One-week delivery', True),
+        ('Level 3', 'eye', 'Advanced due diligence', 'Stress-tested financial and carbon models, structured developer interviews, in-country experts and site visits.', ['Long-term offtakes', 'Direct investments'], 'Three to four weeks', False),
+        ('All levels', 'satellite', 'Geo screening', 'Satellite-informed checks on land eligibility, deforestation history, natural hazards and baseline validity.', ['Nature-based projects', 'Shortlisting'], 'Available immediately', False),
+      ] %}
+      <div class="card tier{% if feat %} tier--featured{% endif %}">
+        <div class="tier__head"><span class="ico">{{ icon(ic) }}</span><span class="tier__level">{{ lvl }}</span></div>
+        <h3>{{ t }}</h3>
+        <p>{{ d }}</p>
+        <ul class="checklist">{% for u in use %}<li>{{ u }}</li>{% endfor %}</ul>
+        <div class="tier__time">{{ icon('clock') }} {{ time }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Why Stratum</span>
+        <h2 class="h2 mt-16" data-split>Unbiased assessments from <span class="serif">market experts</span></h2>
+        <p class="lead mt-24">18,000+ tracked projects, years of structured RFP data and direct transaction experience. With no inventory and no supplier relationships to manage, our analysts focus on one thing: a complete, honest picture of what you're buying.</p>
+        <div class="grid mt-32" style="gap:0">
+          {% for t, d in [
+            ('Conflict-free by design', 'We don\'t hold credits, take ownership stakes, or earn fees from suppliers. Assessments are paid for by clients alone.'),
+            ('Rigour informed by real deals', '60+ years of cumulative VCM experience and 55 million tonnes transacted give us a commercial lens research houses lack.'),
+            ('Scaled to your transaction', 'From a rapid screen of 200 proposals to an on-site assessment for a ten-year offtake.'),
+          ] %}
+          <div style="padding:20px 0;border-top:1px solid var(--line)"><h4>{{ t }}</h4><p class="muted mt-8">{{ d }}</p></div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="media-frame media-frame--tall" data-reveal="scale">
+        <img src="/img/valley.webp" alt="Forested valley assessed during a site visit" loading="lazy" data-parallax>
+        <div class="media-caption"><span><b>Site visit</b> · Advanced due diligence</span><span class="mono">-1.29°, 36.82°</span></div>
+      </div>
+    </div>
+    <div class="mt-64">{{ m.stats([
+      {'n': 18000, 'suf': '+', 'label': 'Projects covered by risk-based analytics'},
+      {'n': 30, 'suf': '+', 'label': 'Hours saved on each due diligence report'},
+      {'n': 5, 'label': 'Core risk pillars assessed'},
+    ], light=True) }}</div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Customer story</span>
+        <h2 class="h2 mt-16" data-split>Meridian Capital accelerates due diligence <span class="serif" style="color:var(--lime)">with Stratum</span></h2>
+        <p class="lead mt-24">Stratum worked as an extension of the team to assess RFP proposals and shortlist projects for their carbon credit programme.</p>
+        <ul class="checklist mt-24">
+          <li>Assessment of spot and forward purchases</li>
+          <li>Risk screening for shortlisting</li>
+          <li>Customised forward risk and due diligence framework</li>
+          <li>In-person monitoring and site visits</li>
+          <li>Ongoing portfolio risk management</li>
+        </ul>
+        <a class="btn btn--light mt-32" href="/case-studies/meridian-capital-net-zero-fund.html">Read the case study {{ icon('arrow') }}</a>
+      </div>
+      <div class="media-frame media-frame--wide" data-reveal="scale"><img src="/img/elephants.webp" alt="Elephants in a restored landscape" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+{{ m.faq([
+  ('Can you assess a project that hasn\'t been rated by a third party?', 'Yes. Many high-value projects carry no public rating, which can rule them out by default. Our framework applies to any project where you know the country, developer and methodology — opening up options others overlook.'),
+  ('How do I know a project on the ground matches its documents?', 'Our Geo screening tool uses satellite data to check land eligibility, deforestation history, hazard exposure and baseline validity, so you can validate what\'s on paper against what\'s on the ground.'),
+  ('What are the five risk pillars?', 'Project quality, methodology, policy environment, developer track record and market conditions. Each is scored with clear evidence so decisions are auditable.'),
+  ('Can due diligence be bought on its own?', 'Yes. Any level can be commissioned independently of a procurement — useful for existing portfolios, investment theses or supplier-led offers.'),
+]) }}
+
+{{ m.cta('Get third-party <span class="serif">assurance</span> today', 'Find out how our due diligence framework can support your next transaction.') }}
+{% endblock %}

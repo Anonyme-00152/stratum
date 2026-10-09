@@ -1,0 +1,15 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% set doc = LEGAL[page] %}
+{% block title %}{{ doc.title }} | Stratum{% endblock %}
+{% block description %}{{ doc.title }} for Stratum, a fictional concept site.{% endblock %}
+{% block canonical %}/{{ page }}.html{% endblock %}
+{% block content %}
+{{ m.page_hero('Legal', doc.title, 'Stratum is a fictional company created as a portfolio concept.', crumb=doc.title, seed=2) }}
+<section class="section section--flush-top">
+  <div class="container container--narrow">
+    <div class="prose article-legal">{{ doc.html }}</div>
+    <p class="muted small mt-48">Questions about this document? <a class="link-arrow" href="/contact-us.html">Contact us {{ icon('arrow') }}</a></p>
+  </div>
+</section>
+{% endblock %}

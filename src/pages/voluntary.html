@@ -1,0 +1,87 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Buy voluntary carbon credits with confidence | Stratum{% endblock %}
+{% block description %}Stratum sources, evaluates and purchases voluntary carbon credits on your behalf to complement your climate strategy and fit your budget.{% endblock %}
+{% block canonical %}/voluntary.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('Voluntary carbon market', 'Harness the VCM to meet your climate goals <span class="serif">with confidence</span>', 'We work on your behalf to source, evaluate and purchase voluntary carbon credits that complement your climate strategy and fit your budget.', ('Get started', '/contact-us.html?role=buyer'), ('How we help', '#help'), variant='photo', photo='river', crumb='Voluntary carbon market') }}
+
+{{ m.logos() }}
+
+<section class="section" id="help">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">How we can help</span><h2 class="h2" data-split>Your expert partner <span class="serif">in the VCM</span></h2><p class="lead">The independent, expert connective tissue between buyers and suppliers — combining procurement, intelligence and advisory so you can balance cost, risk and impact.</p></div>
+    <div class="grid grid-3" data-stagger>
+      {% for ic, t, d, edge, href in [
+        ('rfp', 'Procure through a transparent process', 'We open up the full supplier landscape and run a structured RFP on your behalf: real competing offers, live price benchmarks and an initial risk assessment in one place.', 'We take no positions in projects, so we can advise objectively on every offer.', '/procurement.html'),
+        ('chart', 'Independent intelligence on every credit', 'Price benchmarks, forward price curves and country policy profiles, with consultation calls included to go deeper with our experts.', 'Built on data from 600mn+ tonnes of volume flowing through the platform annually.', '/intelligence.html'),
+        ('users', 'On-tap technical and commercial expertise', 'Advisors who act as an extension of your team, providing third-party assurance for portfolio decisions, investment theses and everything in between.', '60+ cumulative years of VCM expertise; we sit on industry bodies and help set standards.', '/advisory.html'),
+      ] %}
+      <div class="card card--hover" style="display:flex;flex-direction:column">
+        <span class="ico">{{ icon(ic) }}</span>
+        <h3>{{ t }}</h3>
+        <p>{{ d }}</p>
+        <p class="small" style="margin-top:18px;padding:14px;border-radius:12px;background:var(--paper-2);color:var(--ink)"><b style="color:var(--moss)">The Stratum edge:</b> {{ edge }}</p>
+        <a class="link-arrow" href="{{ href }}" style="margin-top:auto;padding-top:20px">Learn more {{ icon('arrow') }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Market challenges</span><h2 class="h2" data-split>Built for the VCM's biggest challenges. <span class="serif">Trusted by companies that move markets.</span></h2></div>
+    <div class="challenge" data-reveal>
+      {% for c, s in [
+        ('Most buyers only see projects brought by a handful of brokers, which narrows options and skews pricing.', 'We run a structured, transparent process across our developer network, so you see real competing offers and can benchmark live prices.'),
+        ('Project quality varies and standards keep evolving, making it hard to know what holds up.', 'Our experts run fully independent, tiered due diligence on the projects that matter to you, from screening to advanced assessment.'),
+        ('Much of the advice on offer comes from intermediaries earning commission on what they recommend.', 'We don\'t take positions in projects or earn developer commissions. We\'re only accountable to you.'),
+        ('Procurement teams stay cautious because a bad project can land them in the headlines.', 'Every project is screened across our five-pillar framework, flagging country, methodology, counterparty, project and additionality risks — and monitored over time.'),
+        ('Manual procurement means months of spreadsheets, email threads and bilateral negotiations.', 'Our RFP platform pulls sourcing, evaluation and contracting into one workflow, so procurements run in weeks rather than months.'),
+        ('CFOs and boards want hard evidence on price, quality and impact for every credit.', 'We give you the evidence pack: pricing benchmarks, due diligence reports and impact reporting that holds up to board-level scrutiny.'),
+        ('Long-term supply is exposed to prices and rules that can move within a single budget cycle.', 'We structure multi-year offtakes with transparent pricing and rebalance them as the market evolves.'),
+      ] %}
+      <div><span class="lbl">The challenge</span><p>{{ c }}</p></div>
+      <div><span class="lbl">How we solve it</span><p>{{ s }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Track record</span>
+        <h2 class="h2 mt-16" data-split>55mn tonnes transacted. <span class="serif" style="color:var(--lime)">A record built on results.</span></h2>
+        <p class="lead mt-24">Since 2021, Stratum has guided hundreds of corporate clients through competitive sourcing in the VCM, enabling 20%+ cost savings on average. Our developer network gives market-wide visibility of existing and incoming supply — including lesser-known opportunities.</p>
+        <a class="btn btn--light mt-32" href="/contact-us.html">Talk to us {{ icon('arrow') }}</a>
+      </div>
+      <div>{{ m.stats([
+        {'n': 5000, 'suf': '+', 'label': 'Project developers in our global network'},
+        {'n': 18000, 'suf': '+', 'label': 'Projects accessible through the platform'},
+        {'n': 1.3, 'dec': 1, 'suf': 'bn', 'label': 'Tonnes sourced for client portfolios'},
+      ]) }}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="split">
+      <div class="media-frame media-frame--wide" data-reveal="scale"><img src="/img/cookstove.webp" alt="A clean cookstove project in use" loading="lazy"></div>
+      <div>
+        <span class="eyebrow">Why the VCM</span>
+        <h2 class="h2 mt-16" data-split>Carbon credits channel finance into <span class="serif">the solutions the world needs</span></h2>
+        <p class="lead mt-24">The voluntary carbon market is an existing, rapid lever for high-impact climate action — channelling real money to projects that protect forests, restore land and remove carbon, often in the places that need it most.</p>
+        <div class="kpi mt-32" style="display:flex;gap:14px;align-items:center;padding:18px"><span class="ico">{{ icon('sprout') }}</span><span><b>Are you a project developer?</b><br><a class="link-arrow" href="/developers.html">Discover the benefits of working with us {{ icon('arrow') }}</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ m.quotes(['lumen', 'velo', 'northwind']) }}
+{{ m.cta('Build a VCM portfolio <span class="serif">you can defend</span>', 'From first purchase to multi-year offtakes, we\'ll help you balance cost, risk and impact.') }}
+{% endblock %}

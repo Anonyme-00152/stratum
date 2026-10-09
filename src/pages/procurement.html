@@ -1,0 +1,95 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Run a carbon credit RFP | Stratum{% endblock %}
+{% block description %}Reach 1,300+ suppliers that compete on your terms in a streamlined, standardised process. Secure the right environmental assets at the best price.{% endblock %}
+{% block canonical %}/procurement.html{% endblock %}
+{% block content %}
+{{ m.page_hero('Environmental asset procurement', 'Run competitive RFPs <span class="serif">without the friction</span>', 'Reach 1,300+ suppliers that compete on your terms in a streamlined, standardised process. Our dedicated team and award-winning technology ensure you secure the right environmental assets at the best price.', ('Get started', '/contact-us.html?role=buyer'), ('See how it works', '#process'), crumb='Run an RFP', seed=5) }}
+
+{{ m.logos() }}
+
+<section class="section" id="process">
+  <div class="container">
+    <div class="stepper" data-stepper>
+      <div class="stepper__nav">
+        <span class="eyebrow">The process</span>
+        <h2 class="h2 mt-16">How we execute market-leading RFPs <span class="serif">with you</span></h2>
+        <ol>
+          {% for s in ['Requirements', 'Supplier database', 'Structured RFP', 'Due diligence', 'Portfolio build', 'Purchase'] %}<li><button type="button">{{ s }}</button></li>{% endfor %}
+        </ol>
+        <div class="stepper__progress"><i></i></div>
+      </div>
+      <div>
+        {% for s in [
+          ('Build your requirements', 'We define what you need before a single supplier is contacted', 'Good procurement starts with a clear brief. Our team translates your climate commitments, risk tolerance and budget into procurement criteria the market can respond to. We hold no credits and have no inventory to push, so every decision is shaped by your requirements, not ours.', ['Best-in-class industry benchmarks', 'Bespoke procurement guidance', 'Internal education and stakeholder engagement']),
+          ('Access the largest VCM database', 'Reach the entire market with a single invitation', 'Our network includes 1,300+ vetted project developers across every major registry and project type. We broadcast your RFP to eligible suppliers only and handle onboarding and submission support. Projects that miss your minimum criteria are filtered out before they reach your desk.', ['18,000+ projects in our database', 'Outreach to 1,300+ active suppliers', 'Developer onboarding and technical support']),
+          ('Run a structured RFP', 'One standardised process, customised to your needs', 'Collect comparable proposals at scale. You define the questions that matter; we provide a validated, standardised data framework that keeps submissions consistent and easy to benchmark — reviewed in a dashboard you can filter, sort and export.', ['Customisable RFP questionnaires', 'Dynamic proposal dashboards', 'Multi-stage support']),
+          ('Evaluate with confidence', 'Embedded risk screening at multiple levels', 'Automated screening runs a rapid first pass on reputation, ratings, methodology risk and country exposure. Analyst-led due diligence then goes deeper across our five risk pillars for the projects that matter most — with an auditable record for every decision.', ['Level 1 — Automated risk screening', 'Level 2 — Analyst-led due diligence', 'Level 3 — Advanced due diligence', 'Across all — Geo screening']),
+          ('Build your portfolio', 'Compare and optimise before you commit', 'Our portfolio constructor lets you stress-test combinations across price, vintage, geography, project type and risk. We help you land a recommended portfolio that is straightforward to defend to sustainability leads, procurement teams and CFOs.', ['Portfolio constructor', 'Scenario modelling', 'Presentation-ready outputs']),
+          ('Purchase through one contract', 'Centralise your spend at competitive prices', 'We act as your contracting counterparty: you sign one contract with Stratum instead of managing separate agreements with multiple developers. We handle negotiation, commercial terms and execution — from spot to long-term forward offtakes.', ['Supplier negotiation', 'Single consolidated contracts', 'Centralised documentation']),
+        ] %}
+        <div class="step">
+          <div class="step__card">
+            <span class="eyebrow">Step {{ loop.index }} · {{ s[0] }}</span>
+            <h3>{{ s[1] }}</h3>
+            <p>{{ s[2] }}</p>
+            <h5>You get access to</h5>
+            <ul class="checklist">{% for p in s[3] %}<li>{{ p }}</li>{% endfor %}</ul>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="split">
+      <div class="media-frame media-frame--tall" data-reveal="scale">
+        <img src="/img/forest.webp" alt="Dense tropical forest canopy" loading="lazy" class="parallax-img" data-parallax>
+        <div class="media-caption"><span><b>Verdant Alliance</b> · 2026 procurement cycle</span><span class="tag tag--lime">Removals</span></div>
+      </div>
+      <div>
+        <span class="eyebrow">Success story</span>
+        <h2 class="h2 mt-16" data-split>Powering nature-based carbon removal <span class="serif" style="color:var(--lime)">at scale</span></h2>
+        <p class="lead mt-24">Stratum was selected by Verdant Alliance — a coalition of buyers committed to nature-based removals at scale — to support its 2026 procurement cycle with a customised, rolling multi-stage RFP.</p>
+        <h5 class="mono mt-32" style="color:var(--sage)">SERVICES PROVIDED</h5>
+        <ul class="checklist">
+          <li>End-to-end RFP procurement support</li>
+          <li>Redesigned multi-stage submission process</li>
+          <li>A customised scorecard to evaluate proposals</li>
+          <li>Automated eligibility and geospatial screening</li>
+        </ul>
+        <a class="btn btn--light mt-32" href="/case-studies/verdant-alliance-removals-rfp.html">Read the case study {{ icon('arrow') }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>Procurement designed to <span class="serif">work for you</span></h2><p class="lead">Our managed RFP is modular and complementary to your operations — you stay in control, guided by market experts.</p></div>
+    {{ m.reasons([
+      ('users', 'An extension of your team', 'We take on the commercial mechanics — supplier outreach, onboarding, negotiation and contracting — so your team can focus on the decisions, not the admin.'),
+      ('scale', 'Zero conflict of interest', 'We hold no carbon inventory and represent no supplier. Every project competes on its own merits, evaluated by a team with no stake in the outcome.'),
+      ('database', 'Data and expertise at every stage', 'Benchmarks from 85,000 price points and hundreds of procurements inform every brief, shortlist and negotiation.'),
+    ], cols=3) }}
+    <div class="mt-64">{{ m.stats([
+      {'n': 1300, 'suf': '+', 'label': 'Vetted suppliers reached by every RFP'},
+      {'n': 20, 'suf': '%+', 'label': 'Average savings vs bilateral sourcing'},
+      {'n': 18000, 'suf': '+', 'label': 'Projects in our database'},
+    ], light=True) }}</div>
+  </div>
+</section>
+
+{{ m.faq([
+  ('How long does a typical RFP take?', 'Because sourcing, evaluation and contracting live in one workflow, competitive procurements run in weeks rather than months. Timelines depend on volume, criteria and the number of stages. Contracting follows once you have approved a recommended portfolio.'),
+  ('Do we have to buy through Stratum?', 'No. You can run your programme independently on the platform, or let our team manage it end to end. When we act as contracting counterparty, you sign one contract instead of many.'),
+  ('How do you get paid if you don\'t take a margin on credits?', 'Our compensation is separated from the price you pay suppliers, and we never take fees from developers. That keeps our incentives aligned with yours: the best portfolio at the best price.'),
+  ('Can we include removals, avoidance and EACs in the same RFP?', 'Yes. Multi-lot RFPs are common, and our framework normalises submissions so you can compare across project types, vintages and geographies.'),
+  ('What contract structures do you support?', 'Spot purchases, forward purchases and long-term offtakes, including delivery guarantees and replacement mechanisms defined up front.'),
+]) }}
+
+{{ m.cta('Run your next procurement <span class="serif">with us</span>', 'First brief to final contract: one process, one partner, zero compromises.') }}
+{% endblock %}

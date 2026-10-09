@@ -1,0 +1,102 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Environmental asset procurement for buyers | Stratum{% endblock %}
+{% block description %}A procurement platform built around the buyer, a conflict-free commercial model, and experts operating as an extension of your team.{% endblock %}
+{% block canonical %}/buyers.html{% endblock %}
+{% block content %}
+{{ m.page_hero('For buyers', 'Build your portfolio with <span class="serif">smarter procurement</span>', 'A platform built around the buyer, a conflict-free commercial model, and experts operating as an extension of your team. Environmental asset procurement, but better.', ('Get started', '/contact-us.html?role=buyer'), ('Estimate your savings', '#calculator'), crumb='Buyers', seed=15) }}
+
+<section class="section--tight" style="padding-bottom:0">
+  <div class="container">{{ m.stats([
+    {'n': 1.3, 'dec': 1, 'suf': 'bn', 'label': 'Tonnes sourced on the Stratum platform'},
+    {'n': 1300, 'suf': '+', 'label': 'Active suppliers in our network'},
+    {'n': 55, 'suf': 'mn', 'label': 'Tonnes transacted'},
+  ], light=True) }}</div>
+</section>
+
+{{ m.logos() }}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>Procurement trusted by <span class="serif">market leaders</span></h2><p class="lead">Transparent, competitive and conflict-free — a portfolio that balances cost, risk and impact.</p></div>
+    {{ m.reasons([
+      ('globe', 'Access to the whole market', 'We take your requirements to the entire market and reach projects you wouldn\'t find through standard channels.'),
+      ('scale', 'A conflict-free, no-inventory model', 'No credits on our balance sheet and no financial position in any project or developer. Every recommendation is about your portfolio.'),
+      ('layers', 'A standardised process, built for efficiency', 'Faster sourcing, easier comparison and a single contract covering all suppliers — tailored to you.'),
+    ], cols=3) }}
+  </div>
+</section>
+
+<section class="section section--alt" id="calculator">
+  <div class="container">
+    <div class="split split--5-7">
+      <div>
+        <span class="eyebrow">One partner. Better results.</span>
+        <h2 class="h2 mt-16" data-split>Competition, not duplication, <span class="serif">lowers your price</span></h2>
+        <p class="lead mt-24">Approaching multiple brokers artificially inflates demand — and prices rise to match. We run one structured process: every relevant supplier bids for the same project, on the same terms, through the same platform.</p>
+        <p class="muted mt-16">Suppliers know the process is competitive and the buyer is serious, so they come in at their best price.</p>
+      </div>
+      <div class="calc" data-calc data-reveal="scale">
+        <div class="calc__inputs">
+          <div class="range">
+            <div class="range__top"><label for="calc-volume">Annual volume</label><output data-o="volume" for="calc-volume"></output></div>
+            <input type="range" id="calc-volume" min="5000" max="1000000" step="5000" value="150000">
+            <div class="range__scale"><span>5k t</span><span>1m t</span></div>
+          </div>
+          <div class="range">
+            <div class="range__top"><label for="calc-price">Average price</label><output data-o="price" for="calc-price"></output></div>
+            <input type="range" id="calc-price" min="4" max="150" step="1" value="24">
+            <div class="range__scale"><span>$4 avoidance</span><span>$150 removals</span></div>
+          </div>
+          <div class="range">
+            <div class="range__top"><label for="calc-years">Programme length</label><output data-o="years" for="calc-years"></output></div>
+            <input type="range" id="calc-years" min="1" max="10" step="1" value="5">
+            <div class="range__scale"><span>1 yr</span><span>10 yrs</span></div>
+          </div>
+        </div>
+        <div class="calc__out">
+          <div class="hero__topo"><canvas data-topo="dark" data-seed="30" data-levels="9" data-mouse="false"></canvas></div>
+          <span class="eyebrow">Estimated savings</span>
+          <div class="calc__big" data-o="big" aria-live="polite">$0</div>
+          <p class="small" style="color:var(--on-dark-2);margin-top:8px">over the programme, at a 20% average saving</p>
+          <div class="calc__rows">
+            <div><span>Current spend</span><b data-o="spend"></b></div>
+            <div><span>Annual savings</span><b data-o="annual"></b></div>
+            <div><span>Programme spend after savings</span><b data-o="total"></b></div>
+          </div>
+          <p class="calc__note">Indicative only, based on the 20%+ average savings reported across Stratum procurements. Actual results depend on market conditions.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Solutions</span><h2 class="h2" data-split>For any — or every — stage of <span class="serif">your journey</span></h2></div>
+    {{ m.feature_tabs('buyer', [
+      {'tab': 'Advisory', 'eyebrow': 'Solution', 'title': 'Build a strategy that holds up', 'text': 'Proprietary data, policy expertise and real transaction experience combine into a carbon procurement strategy that works commercially and holds up over time — from portfolio design to stakeholder reporting.', 'img': 'lake', 'link': ('Learn more', '/advisory.html')},
+      {'tab': 'Procurement', 'eyebrow': 'Solution', 'title': 'Source the whole market in one process', 'text': 'Define your requirements; we surface the right supply, manage supplier responses and deliver a clear shortlist in one dashboard. Our competitive process delivers 20% savings compared to other approaches.', 'img': 'canopy', 'link': ('Learn more', '/procurement.html')},
+      {'tab': 'Due diligence', 'eyebrow': 'Solution', 'title': 'Know the risk before you commit', 'text': 'Assess projects across multiple risk dimensions with a clear, evidence-based view. Our tiered approach scales the depth of analysis to your needs.', 'img': 'mangrove', 'link': ('Learn more', '/due-diligence.html')},
+    ]) }}
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="split">
+      <div class="media-frame media-frame--tall" data-reveal="scale"><img src="/img/seedling.webp" alt="Hands planting a seedling" loading="lazy" data-parallax></div>
+      <div>
+        <span class="eyebrow">Projects our clients support</span>
+        <h2 class="h2 mt-16" data-split>Frontier removals meet <span class="serif" style="color:var(--lime)">high-integrity nature</span></h2>
+        <p class="lead mt-24">Northwind Re's portfolio was built with Stratum to combine frontier carbon removal with high-integrity nature-based solutions — a new benchmark for climate action in reinsurance, with site-level diligence on every project.</p>
+        <a class="btn btn--light mt-32" href="/case-studies/northwind-climate-resilience-portfolio.html">Read the Northwind story {{ icon('arrow') }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ m.quotes(['northwind', 'velo', 'lumen']) }}
+{{ m.insights('Related resources') }}
+{{ m.cta('Improve your environmental asset <span class="serif">procurement</span>', 'Speak to our team about your next purchase, offtake or portfolio review.') }}
+{% endblock %}

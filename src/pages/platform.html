@@ -1,0 +1,132 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}The Stratum platform for environmental markets{% endblock %}
+{% block description %}One platform for environmental asset procurement, market intelligence and supplier access. Built on real market experience.{% endblock %}
+{% block canonical %}/platform.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+
+<section class="page-hero page-hero--dark" style="padding-bottom:0">
+  <div class="hero__topo"><canvas data-topo="dark" data-seed="21"></canvas></div>
+  <div class="container">
+    <div class="center" style="max-width:900px;margin:0 auto">
+      <span class="eyebrow">The Stratum Platform</span>
+      <h1 data-split style="max-width:none;margin-inline:auto">Built for <span class="serif">environmental markets</span></h1>
+      <p class="lead mx-auto" data-reveal style="--d:.25s">Whether you're sourcing assets, selling them, or looking for data to make smarter decisions, our platform delivers the tools — and the people — you need.</p>
+      <div class="btn-row" data-reveal style="--d:.35s;justify-content:center">
+        <a class="btn btn--lg btn--accent" href="/contact-us.html">Book a demo {{ icon('arrow') }}</a>
+        <a class="btn btn--lg btn--ghost-light" href="/contact-us.html">Sign in</a>
+      </div>
+    </div>
+
+    <div class="mock mt-64" data-reveal="scale" style="--d:.2s;max-width:1080px;margin-inline:auto;border-radius:22px 22px 0 0;border-bottom:0">
+      <div class="mock__bar"><span class="mock__dots"><i></i><i></i><i></i></span><span class="mock__url">app.stratum.markets/portfolio</span></div>
+      <div style="display:grid;grid-template-columns:210px 1fr;min-height:420px" class="app-shell">
+        <div class="app-side">
+          <p class="mono muted" style="padding:6px 10px">WORKSPACE</p>
+          {% for ic, l in [('portfolio','Portfolio'),('rfp','RFPs'),('shield','Due diligence'),('chart','Pricing'),('globe','Country policy'),('plane','CORSIA'),('trending','Market dynamics')] %}
+          <span class="app-nav{% if loop.first %} is-on{% endif %}">{{ icon(ic) }} {{ l }}</span>
+          {% endfor %}
+        </div>
+        <div style="padding:22px;display:grid;gap:16px;align-content:start">
+          <div class="mock__head"><div><h4>Portfolio overview</h4><p>FY2026 programme · 14 projects · 6 countries</p></div><span class="status">Synced</span></div>
+          <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+            <div class="kpi"><small>Contracted</small><b>412k t</b><em>of 450k target</em></div>
+            <div class="kpi"><small>Avg. price</small><b>$22.80</b><em>−19% vs benchmark</em></div>
+            <div class="kpi"><small>Removals share</small><b>38%</b><em>SBTi-aligned</em></div>
+            <div class="kpi"><small>Delivery risk</small><b>Low</b><em>2 watch items</em></div>
+          </div>
+          <div class="app-grid">
+            <div class="kpi" style="padding:16px">
+              <small>Deliveries by vintage (kt)</small>
+              <svg viewBox="0 0 320 120" style="margin-top:10px" aria-hidden="true">
+                {% for v, h in [('22',40),('23',62),('24',88),('25',104),('26',96),('27',70),('28',52)] %}
+                <rect x="{{ loop.index0 * 45 + 6 }}" y="{{ 104 - h }}" width="28" height="{{ h }}" rx="5" fill="{{ '#0f3329' if loop.index0 < 4 else '#a7c2a3' }}"/>
+                <text x="{{ loop.index0 * 45 + 20 }}" y="118" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#66786e">'{{ v }}</text>
+                {% endfor %}
+              </svg>
+            </div>
+            <div class="kpi" style="padding:16px">
+              <small>Mix by project type</small>
+              <div style="display:flex;gap:14px;align-items:center;margin-top:10px">
+                <svg viewBox="0 0 42 42" width="96" height="96" aria-hidden="true">
+                  {% set segs = [(38,'#0f3329'),(27,'#4e7a5e'),(20,'#eaa43c'),(15,'#a7c2a3')] %}
+                  {% set ns = namespace(off=25) %}
+                  {% for p, c in segs %}<circle cx="21" cy="21" r="15.9" fill="none" stroke="{{ c }}" stroke-width="6" stroke-dasharray="{{ p }} {{ 100 - p }}" stroke-dashoffset="{{ ns.off }}"/>{% set ns.off = ns.off - p %}{% endfor %}
+                </svg>
+                <div style="display:grid;gap:4px;font-size:12px">
+                  {% for l, c in [('Removals · 38%','#0f3329'),('REDD+ · 27%','#4e7a5e'),('Cookstoves · 20%','#eaa43c'),('Renewables · 15%','#a7c2a3')] %}<span style="display:flex;gap:6px;align-items:center"><i style="width:8px;height:8px;border-radius:2px;background:{{ c }}"></i>{{ l }}</span>{% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .app-side { border-right: 1px solid var(--line); padding: 16px 10px; display: grid; gap: 2px; align-content: start; background: var(--paper); }
+  .app-nav { display: flex; gap: 10px; align-items: center; padding: 9px 10px; border-radius: 9px; font-size: 13.5px; color: var(--ink-2); }
+  .app-nav svg { width: 16px; height: 16px; }
+  .app-nav.is-on { background: var(--card); color: var(--ink); font-weight: 600; box-shadow: var(--shadow-1); }
+  .app-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px; }
+  @media (max-width: 760px) { .app-shell { grid-template-columns: 1fr !important; } .app-side { display: none; } .app-grid { grid-template-columns: 1fr; } .mock .kpis { grid-template-columns: repeat(2, 1fr) !important; } }
+</style>
+
+{{ m.logos() }}
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">Three hubs, one foundation</span>
+      <h2 class="h2" data-split>A platform shaped by <span class="serif">real market experience</span></h2>
+      <p class="lead">Every workflow was built from hundreds of real procurements — then hardened by the teams who run them every day.</p>
+    </div>
+    {{ m.feature_tabs('hub', [
+      {'tab': 'Buyer tools', 'eyebrow': 'Buyers Hub', 'title': 'Carbon procurement built for how your team works', 'text': 'Run your programme independently through the platform, or let our team manage the process on your behalf. The Buyers Hub supports both with the same structured RFP workflow, project evaluation tools and portfolio management — whatever level of support you need.', 'points': ['Structured RFP workflows and scorecards', 'Automated eligibility and geospatial screening', 'Portfolio constructor and scenario modelling'], 'img': 'canopy', 'link': ('Run an RFP', '/procurement.html')},
+      {'tab': 'Intelligence tools', 'eyebrow': 'Intelligence', 'title': 'The context behind every carbon market decision', 'text': 'Proprietary datasets, expert analysis and modern technology combine to give every market participant unique insight — through an interface built for speed.', 'points': ['85,000 pricing data points and forward curves', 'Country policy profiles and Article 6 tracking', 'CORSIA supply and demand forecasts to 2035'], 'img': 'coast', 'link': ('Access intelligence', '/intelligence.html')},
+      {'tab': 'Supplier tools', 'eyebrow': 'Supplier Hub', 'title': 'Turn every opportunity into a repeatable sales motion', 'text': 'Access qualified demand, submit structured offers and reuse your project data to move faster each time — with transparent feedback after every RFP.', 'points': ['Invitations from buyers with signed mandates', 'Reusable project profiles and submissions', 'Post-RFP pricing and preference insights'], 'img': 'farmer', 'link': ('Access demand', '/access-demand.html')},
+    ]) }}
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="h2" data-split>A complete <span class="serif" style="color:var(--lime)">procurement system</span></h2>
+      <p class="lead">Buyers, suppliers and market data operate on a shared foundation. RFPs become opportunities, submissions become signals, and every transaction improves how the next is sourced, evaluated and won.</p>
+    </div>
+    <div class="flow" data-stagger=".12">
+      <div class="flow__node"><span class="ico">{{ icon('building') }}</span><h4>Buyers set the mandate</h4><p>Requirements, budget and risk appetite become a structured RFP.</p><ul><li>Criteria &amp; scorecards</li><li>Signed procurement mandate</li></ul></div>
+      <div class="flow__arrow" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="dash" d="M4 20h28"/><path d="M26 13l7 7-7 7"/></svg></div>
+      <div class="flow__node"><span class="ico">{{ icon('sprout') }}</span><h4>Suppliers compete</h4><p>1,300+ vetted developers submit comparable, standardised offers.</p><ul><li>Eligibility filtering</li><li>Automated risk screening</li></ul></div>
+      <div class="flow__arrow" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path class="dash" d="M4 20h28"/><path d="M26 13l7 7-7 7"/></svg></div>
+      <div class="flow__node"><span class="ico">{{ icon('database') }}</span><h4>Data compounds</h4><p>Every submission feeds benchmarks that sharpen the next decision.</p><ul><li>Pricing &amp; forward curves</li><li>Market dynamics signals</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center"><span class="eyebrow">Enterprise ready</span><h2 class="h2" data-split>Built to stand up to <span class="serif">scrutiny</span></h2></div>
+    <div class="grid grid-3" data-stagger>
+      {% for ic, t, d in [
+        ('lock', 'Secure by default', 'Role-based access, SSO-ready accounts and encrypted data in transit and at rest.'),
+        ('file', 'Audit-ready records', 'Every evaluation, score and decision is logged — easy to defend to CFOs and auditors.'),
+        ('refresh', 'Live portfolio monitoring', 'Delivery milestones, ratings changes and policy shifts flagged as they happen.'),
+        ('download', 'Export anything', 'Presentation-ready outputs and data exports for internal stakeholders.'),
+        ('users', 'Expert in the loop', 'Consult our analysts directly from the platform whenever you need depth.'),
+        ('globe', 'Whole-market coverage', '18,000+ projects across 23 registries, harmonised into a single dataset.'),
+      ] %}
+      <div class="card card--hover"><span class="ico">{{ icon(ic) }}</span><h3>{{ t }}</h3><p>{{ d }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{{ m.quotes(['halcyon', 'greenfield', 'northwind'], dark=False) }}
+
+{{ m.cta('See the platform <span class="serif">in action</span>', 'We will walk you through the product most relevant to you — whether you are buying, selling, or looking to understand the market.', ('Book a demo', '/contact-us.html')) }}
+{% endblock %}

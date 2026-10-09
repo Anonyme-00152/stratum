@@ -1,0 +1,45 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}For carbon project developers | Stratum{% endblock %}
+{% block description %}A demand network of 200+ active buyers and a team that works alongside you from first conversation to signed deal.{% endblock %}
+{% block canonical %}/developers.html{% endblock %}
+{% block header_mod %} site-header--dark{% endblock %}
+{% block content %}
+{{ m.page_hero('Project developers', 'Scale and grow <span class="serif">your impact</span>', 'A demand network of 200+ active buyers, and a team that works alongside you from first conversation to signed deal.', ('Create your free account', '/contact-us.html?role=developer'), ('Why Stratum', '#why'), variant='photo', photo='canopy', crumb='Developers') }}
+
+<section class="section--tight" style="padding-bottom:0">
+  <div class="container">{{ m.stats([
+    {'pre': '$', 'n': 600, 'suf': 'mn', 'label': 'Volume channelled through the platform annually'},
+    {'n': 55, 'suf': 'mn', 'label': 'Credits transacted'},
+    {'n': 200, 'suf': '+', 'label': 'Active buyers'},
+  ], light=True) }}</div>
+</section>
+
+{{ m.logos() }}
+
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Why Stratum</span><h2 class="h2" data-split>Structural advantages, <span class="serif">not just promises</span></h2><p class="lead">We hold no inventory and represent no supply, so buyers come to us with real mandates and assess every project on its merits.</p></div>
+    {{ m.reasons([
+      ('handshake', 'Guaranteed access to demand', 'We sign formal procurement mandates with clients before supply is sourced. Demand is contractually anchored, so your project reaches buyers with real intent.'),
+      ('refresh', 'Standardised RFPs for economies of scale', 'Build your project profile once. Every new RFP then costs you less time and money to enter.'),
+      ('scale', 'Conflict-free, no-inventory model', 'No proprietary inventory and no exclusive supplier relationships. Selection is based strictly on buyer criteria.'),
+    ], cols=3) }}
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow">Support</span><h2 class="h2" data-split>Everything you need to bring your project <span class="serif">to market</span></h2></div>
+    {{ m.feature_tabs('dev', [
+      {'tab': 'Access demand', 'title': 'Get in front of qualified demand', 'text': 'Reach buyers with committed procurement mandates through a single, standardised process — and receive direct invitations as new mandates open.', 'img': 'field', 'link': ('Access demand', '/access-demand.html')},
+      {'tab': 'Intelligence', 'title': 'Benchmark against the market', 'text': 'Pricing benchmarks by methodology, geography and project type, alongside buyer demand signals and policy tracking — so you can price, position and time your supply.', 'img': 'coast', 'link': ('Access intelligence', '/intelligence.html')},
+      {'tab': 'Advisory', 'title': 'Enter the market with confidence', 'text': 'Whether it\'s your first issuance or a growing pipeline, we help you sharpen your commercial approach and connect with the right buyers and investors.', 'img': 'tree', 'link': ('Get advisory support', '/advisory.html')},
+    ]) }}
+  </div>
+</section>
+
+{{ m.quotes(['canopia', 'bloom', 'greenfield'], dark=True) }}
+{{ m.insights('Featured insights') }}
+{{ m.cta('Make sure the right buyers <span class="serif">can find you</span>', 'Create your free account and get invited to RFPs that match your projects.', ('Create your free account', '/contact-us.html?role=developer'), points=['Free to join, no exclusivity', 'Invitations backed by signed mandates', 'Structured feedback after every RFP']) }}
+{% endblock %}

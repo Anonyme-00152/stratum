@@ -1,0 +1,221 @@
+{# ---------- Inner page hero ---------- #}
+{% macro page_hero(eyebrow, title, lead, primary=None, secondary=None, variant='light', crumb=None, photo=None, aside=None, seed=3) %}
+<section class="page-hero{% if variant == 'dark' %} page-hero--dark{% elif variant == 'photo' %} page-hero--photo{% endif %}">
+  {% if variant == 'photo' %}
+  <div class="page-hero__bg"><img src="/img/{{ photo }}.webp" alt="" width="1600" height="1067" fetchpriority="high"></div>
+  {% else %}
+  <div class="hero__topo"><canvas data-topo="{{ 'dark' if variant == 'dark' else 'light' }}" data-seed="{{ seed }}"></canvas></div>
+  {% if variant != 'dark' %}<div class="hero__fade"></div>{% endif %}
+  {% endif %}
+  <div class="container">
+    <div class="{% if aside %}split split--7-5{% endif %}">
+      <div>
+        {% if crumb %}<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>{{ crumb }}</span></nav>{% endif %}
+        <span class="eyebrow">{{ eyebrow }}</span>
+        <h1 data-split>{{ title|safe }}</h1>
+        <p class="lead" data-reveal style="--d:.25s">{{ lead }}</p>
+        {% if primary or secondary %}
+        <div class="btn-row" data-reveal style="--d:.35s">
+          {% if primary %}<a class="btn btn--lg {{ 'btn--accent' if variant != 'light' else '' }}" href="{{ primary[1] }}">{{ primary[0] }} {{ icon('arrow') }}</a>{% endif %}
+          {% if secondary %}<a class="btn btn--lg {{ 'btn--ghost-light' if variant != 'light' else 'btn--ghost' }}" href="{{ secondary[1] }}">{{ secondary[0] }}</a>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% if aside %}<div data-reveal="scale" style="--d:.3s">{{ aside }}</div>{% endif %}
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- Logo marquee ---------- #}
+{% macro logos(label='Trusted by leading organisations') %}
+<section class="logos" aria-label="Clients">
+  <p class="logos__label">{{ label }}</p>
+  <div class="marquee">
+    <div class="marquee__track">
+      {% for loop2 in [0, 1] %}
+      {% for name, style in CLIENTS %}
+      <span class="wordmark {{ style if style.startswith('wm') else '' }}" {% if loop2 %}aria-hidden="true"{% endif %}>{% if style == 'dot' %}<i></i>{% elif style == 'sq' %}<i class="sq"></i>{% endif %}{{ name }}</span>
+      {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- CTA band ---------- #}
+{% macro cta(title, text, primary=('Talk to our team', '/contact-us.html'), secondary=None, points=None) %}
+<section class="section section--tight">
+  <div class="container">
+    <div class="cta" data-reveal="scale">
+      <div class="hero__topo"><canvas data-topo="dark" data-seed="9" data-levels="11"></canvas></div>
+      <div class="cta__grid">
+        <div>
+          <span class="eyebrow">Get started</span>
+          <h2 class="h2 mt-16">{{ title|safe }}</h2>
+          <p>{{ text }}</p>
+          <div class="btn-row">
+            <a class="btn btn--lg btn--accent" href="{{ primary[1] }}">{{ primary[0] }} {{ icon('arrow') }}</a>
+            {% if secondary %}<a class="btn btn--lg btn--ghost-light" href="{{ secondary[1] }}">{{ secondary[0] }}</a>{% endif %}
+          </div>
+        </div>
+        <div class="cta__side">
+          {% for p in points or ['A specialist reply, not a sales script', 'No inventory, no supplier fees — only your interests', 'From a single spot purchase to multi-year offtakes'] %}
+          <div>{{ icon('check') }}<span>{{ p }}</span></div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- Post card ---------- #}
+{% macro post_card(a, feature=False) %}
+<a class="post{% if feature %} post--feature{% endif %}" href="{{ a.url }}" data-cat="{{ a.kind }}" data-topic="{{ a.topic }}">
+  <div class="post__media">
+    {% if a.cover %}<img src="/{{ a.cover }}" alt="" loading="lazy">{% else %}<canvas data-topo="cover" data-seed="{{ a.slug|length }}" data-animate="false" data-mouse="false" data-cell="9" data-scale="0.006" style="background:var(--forest)"></canvas>{% endif %}
+    <span class="tag {{ 'tag--lime' if a.kind == 'case-study' else 'tag--dark' }}">{{ a.label }}</span>
+  </div>
+  <div class="post__body">
+    <div class="post__meta"><span>{{ a.date|date }}</span><i></i><span>{{ a.read }} min read</span></div>
+    <h3>{{ a.title }}</h3>
+    {% if feature %}<p>{{ a.desc }}</p>{% endif %}
+    <div class="post__foot"><span class="link-arrow">{{ 'Read the story' if a.kind == 'case-study' else ('Get the report' if a.kind == 'report' else 'Read article') }} {{ icon('arrow') }}</span></div>
+  </div>
+</a>
+{% endmacro %}
+
+{# ---------- Insights strip ---------- #}
+{% macro insights(title='Latest insights', kind='blog', n=3, alt=False, eyebrow='Resources') %}
+<section class="section{% if alt %} section--alt{% endif %}">
+  <div class="container">
+    <div class="section-head section-head--row">
+      <div><span class="eyebrow">{{ eyebrow }}</span><h2 class="h2" data-split>{{ title }}</h2></div>
+      <a class="btn btn--ghost" href="/{{ KIND[kind].dir }}/">View all {{ icon('arrow') }}</a>
+    </div>
+    <div class="grid grid-3" data-stagger>
+      {% for a in by_kind[kind][:n] %}{{ post_card(a) }}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- FAQ ---------- #}
+{% macro faq(items, title='Frequently asked questions', lead=None) %}
+<section class="section">
+  <div class="container">
+    <div class="split split--5-7 split--top">
+      <div class="section-head" style="position:sticky;top:110px">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="h2" data-split>{{ title }}</h2>
+        {% if lead %}<p class="lead">{{ lead }}</p>{% endif %}
+        <a class="link-arrow mt-24" href="/contact-us.html">Ask us something else {{ icon('arrow') }}</a>
+      </div>
+      <div class="faq" data-reveal>
+        {% for q, a in items %}
+        <details{% if loop.first %} open{% endif %}>
+          <summary>{{ q }}<span class="pm" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p>{{ a }}</p></div>
+        </details>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- Testimonial carousel ---------- #}
+{% macro quotes(keys, dark=False, eyebrow='Customer stories', title=None) %}
+<section class="section{% if dark %} section--dark{% else %} section--alt{% endif %}">
+  <div class="container">
+    {% if title %}<div class="section-head"><span class="eyebrow">{{ eyebrow }}</span><h2 class="h2" data-split>{{ title|safe }}</h2></div>{% endif %}
+    <div class="quotes" data-carousel data-interval="9000" aria-roledescription="carousel" aria-label="Customer testimonials">
+      {% for k in keys %}{% set t = T[k] %}
+      <figure class="quote-slide" data-slide aria-roledescription="slide" aria-label="{{ loop.index }} of {{ keys|length }}"{% if not loop.first %} hidden{% endif %}>
+        <div class="quote-slide__media"><img src="/img/{{ t.img }}-sm.webp" alt="" loading="lazy" width="800" height="533"><span class="tag {{ 'tag--lime' if dark else 'tag--dark' }}">{{ t.co }} × Stratum</span></div>
+        <div>
+          <blockquote class="quote">{{ t.q }}</blockquote>
+          <figcaption class="quote__by">
+            <span class="avatar" aria-hidden="true">{{ initials(t.name) }}</span>
+            <span><strong>{{ t.name }}</strong><span>{{ t.role }}</span></span>
+          </figcaption>
+          {% if t.case %}<a class="link-arrow mt-24" href="{{ t.case }}">Read the case study {{ icon('arrow') }}</a>{% endif %}
+        </div>
+      </figure>
+      {% endfor %}
+      <div class="carousel-ctrl">
+        <div class="dots"></div>
+        <button class="round-btn" type="button" data-prev aria-label="Previous testimonial">{{ icon('arrow-left') }}</button>
+        <button class="round-btn" type="button" data-next aria-label="Next testimonial">{{ icon('arrow') }}</button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endmacro %}
+
+{# ---------- Stats ---------- #}
+{% macro stats(items, light=False) %}
+<div class="stats stats--{{ items|length }}{% if light %} stats--light{% endif %}" data-stagger>
+  {% for s in items %}
+  <div class="stat">
+    <div class="stat__value">{{ s.pre or '' }}<span data-count="{{ s.n }}" data-decimals="{{ s.dec or 0 }}">{{ s.n }}</span><small>{{ s.suf or '' }}</small></div>
+    <p class="stat__label">{{ s.label }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# ---------- Team ---------- #}
+{% macro team(keys, cols=4) %}
+<div class="grid grid-{{ cols }}" data-stagger=".06">
+  {% for k in keys %}{% set p = PEOPLE[k] %}
+  <article class="person">
+    <div class="person__photo"><canvas data-topo="mist" data-seed="{{ loop.index * 7 }}" data-animate="false" data-mouse="false" data-cell="8" data-scale="0.009" data-levels="10" data-accent="4"></canvas><span class="person__initials" aria-hidden="true">{{ initials(p[0]) }}</span></div>
+    <h4>{{ p[0] }}</h4>
+    <p class="role">{{ p[1] }}</p>
+    <p>{{ p[2] }}</p>
+  </article>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# ---------- Feature tab set ---------- #}
+{% macro feature_tabs(id, tabs, dark=False) %}
+<div data-tabs>
+  <div class="tabs__list" role="tablist" aria-label="Features">
+    {% for t in tabs %}
+    <button class="tabs__tab" role="tab" type="button" id="{{ id }}-tab-{{ loop.index }}" aria-controls="{{ id }}-panel-{{ loop.index }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ 0 if loop.first else -1 }}">{{ t.tab }}</button>
+    {% endfor %}
+  </div>
+  {% for t in tabs %}
+  <div class="tabs__panel" role="tabpanel" id="{{ id }}-panel-{{ loop.index }}" aria-labelledby="{{ id }}-tab-{{ loop.index }}"{% if not loop.first %} hidden{% endif %}>
+    <div class="feature-panel">
+      <div>
+        <span class="eyebrow">{{ t.eyebrow or 'Solution' }}</span>
+        <h3>{{ t.title }}</h3>
+        <p>{{ t.text }}</p>
+        {% if t.points %}<ul class="checklist">{% for p in t.points %}<li>{{ p }}</li>{% endfor %}</ul>{% endif %}
+        {% if t.meta %}<p class="mono mt-24" style="color:var(--moss)">{{ icon('clock', 'inline') }} {{ t.meta }}</p>{% endif %}
+        {% if t.link %}<div class="btn-row"><a class="btn {{ 'btn--light' if dark else '' }}" href="{{ t.link[1] }}">{{ t.link[0] }} {{ icon('arrow') }}</a></div>{% endif %}
+      </div>
+      <div class="feature-panel__media"><img src="/img/{{ t.img }}-sm.webp" alt="" loading="lazy" width="800" height="533"></div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}
+
+{# ---------- Reasons grid ---------- #}
+{% macro reasons(items, cols=2, dark=False) %}
+<div class="grid grid-{{ cols }}" data-stagger>
+  {% for r in items %}
+  <div class="card card--hover">
+    <span class="ico{% if loop.index % 3 == 2 %} ico--amber{% endif %}">{{ icon(r[0]) }}</span>
+    <span class="card__num">0{{ loop.index }}</span>
+    <h3>{{ r[1] }}</h3>
+    <p>{{ r[2] }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endmacro %}

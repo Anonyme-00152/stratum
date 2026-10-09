@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}Stratum{% endblock %}</title>
+  <meta name="description" content="{% block description %}Structured procurement, independent advisory and real-time intelligence for environmental markets.{% endblock %}">
+  <meta name="theme-color" content="#0f3329">
+  <link rel="canonical" href="{{ SITE_URL }}{% block canonical %}/{% endblock %}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Stratum">
+  <meta property="og:title" content="{{ self.title() }}">
+  <meta property="og:description" content="{{ self.description() }}">
+  <meta property="og:image" content="{{ SITE_URL }}/{% block ogimage %}img/river.webp{% endblock %}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Stratum","legalName":"Stratum Markets Ltd","url":"{{ SITE_URL }}","logo":"{{ SITE_URL }}/favicon.svg"}</script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header{% block header_mod %}{% endblock %}">
+    <div class="container">
+      <a class="logo" href="/" aria-label="Stratum home">{{ LOGO }}<span>Stratum</span></a>
+      <nav class="nav" aria-label="Primary">
+        <div class="nav__item"><a class="nav__link{% if page == 'platform' %} is-active{% endif %}" href="/platform.html">Platform</a></div>
+        <div class="nav__item">
+          <button class="nav__link" type="button" data-mega="mega-solutions" aria-expanded="false" aria-controls="mega-solutions">Solutions {{ icon('chevron') }}</button>
+        </div>
+        <div class="nav__item">
+          <button class="nav__link" type="button" data-mega="mega-resources" aria-expanded="false" aria-controls="mega-resources">Resources {{ icon('chevron') }}</button>
+        </div>
+        <div class="nav__item"><a class="nav__link{% if page == 'about-us' %} is-active{% endif %}" href="/about-us.html">About</a></div>
+      </nav>
+
+      <div class="mega mega--solutions" id="mega-solutions">
+        {% for group in SOLUTIONS %}
+        <div>
+          <p class="mega__title">{{ group.title }}</p>
+          {% for it in group['items'] %}
+          <a class="mega__link" href="{{ it.href }}"><span class="mega__ico">{{ icon(it.icon) }}</span><span><strong>{{ it.label }}</strong><span>{{ it.desc }}</span></span></a>
+          {% endfor %}
+        </div>
+        {% endfor %}
+        {% set feat = by_slug['how-to-structure-your-carbon-portfolio-under-new-net-zero-standards'] %}
+        <a class="mega__feature" href="{{ feat.url }}">
+          <img src="/img/canopy-sm.webp" alt="" loading="lazy" width="800" height="533">
+          <span class="tag tag--dark">Guide · {{ feat.date|date('short') }}</span>
+          <strong>{{ feat.title }}</strong>
+          <span class="link-arrow" style="color:var(--lime)">Read the guide {{ icon('arrow') }}</span>
+        </a>
+      </div>
+
+      <div class="mega mega--resources" id="mega-resources">
+        <div>
+          <p class="mega__title">Resources</p>
+          {% for it in RESOURCES[:3] %}
+          <a class="mega__link" href="{{ it.href }}"><span class="mega__ico">{{ icon(it.icon) }}</span><span><strong>{{ it.label }}</strong><span>{{ it.desc }}</span></span></a>
+          {% endfor %}
+        </div>
+        <div>
+          <p class="mega__title">Success stories</p>
+          {% for it in RESOURCES[3:] %}
+          <a class="mega__link" href="{{ it.href }}"><span class="mega__ico">{{ icon(it.icon) }}</span><span><strong>{{ it.label }}</strong><span>{{ it.desc }}</span></span></a>
+          {% endfor %}
+        </div>
+        {% set latest = by_kind['blog'][0] %}
+        <a class="mega__feature" href="{{ latest.url }}">
+          <img src="/{{ latest.cover or 'img/river-sm.webp' }}" alt="" loading="lazy">
+          <span class="tag tag--dark">Latest · {{ latest.date|date }}</span>
+          <strong>{{ latest.title }}</strong>
+          <span class="link-arrow" style="color:var(--lime)">Read article {{ icon('arrow') }}</span>
+        </a>
+      </div>
+
+      <div class="header-actions">
+        <a class="signin" href="/contact-us.html">Sign in</a>
+        <a class="btn btn--sm btn--primary-h" href="/contact-us.html">Talk to us {{ icon('arrow') }}</a>
+        <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer">
+    <a href="/platform.html">Platform</a>
+    <details>
+      <summary>Solutions {{ icon('chevron') }}</summary>
+      <div class="drawer__group">
+        {% for group in SOLUTIONS %}
+        <p>{{ group.title }}</p>
+        {% for it in group['items'] %}<a href="{{ it.href }}">{{ it.label }}</a>{% endfor %}
+        {% endfor %}
+      </div>
+    </details>
+    <details>
+      <summary>Resources {{ icon('chevron') }}</summary>
+      <div class="drawer__group">
+        {% for it in RESOURCES %}<a href="{{ it.href }}">{{ it.label }}</a>{% endfor %}
+      </div>
+    </details>
+    <a href="/about-us.html">About</a>
+    <div class="drawer__cta">
+      <a class="btn btn--lg" href="/contact-us.html">Talk to us {{ icon('arrow') }}</a>
+      <a class="btn btn--lg btn--ghost" href="/contact-us.html">Sign in</a>
+    </div>
+  </div>
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" aria-label="Stratum home">{{ LOGO }}<span>Stratum</span></a>
+          <p>The operating system for environmental markets. Procurement, intelligence and advisory — conflict-free by design.</p>
+          <div class="socials">
+            <a href="/contact-us.html" aria-label="Contact Stratum">{{ icon('mail') }}</a>
+          </div>
+          <span class="bcorp"><b>S</b> Concept project · Fictional company</span>
+        </div>
+        <div class="footer-col">
+          <h5>By use case</h5>
+          <ul>{% for it in SOLUTIONS[0]['items'] %}<li><a href="{{ it.href }}">{{ it.label }}</a></li>{% endfor %}</ul>
+        </div>
+        <div class="footer-col">
+          <h5>Markets &amp; teams</h5>
+          <ul>
+            {% for it in SOLUTIONS[1]['items'] + SOLUTIONS[2]['items'] %}<li><a href="{{ it.href }}">{{ it.label }}</a></li>{% endfor %}
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Resources</h5>
+          <ul>
+            <li><a href="/reports/">Reports</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/case-studies/">Case studies</a></li>
+            <li><a href="/resources.html#events">Events &amp; webinars</a></li>
+            <li><a href="/resources.html#newsletter">Newsletter</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="/platform.html">Platform</a></li>
+            <li><a href="/about-us.html">About</a></li>
+            <li><a href="/contact-us.html">Contact</a></li>
+            <li><a href="/contact-us.html">Sign in</a></li>
+          </ul>
+          <h5 style="margin-top:28px">Visit</h5>
+          <address style="font-style:normal;font-size:15px;color:var(--on-dark-2);line-height:1.6">London<br>United Kingdom</address>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>{{ BUILD_YEAR }}</span> Stratum — a fictional concept by EbuStudio. Design &amp; development by Ebubekir Arti.</span>
+        <nav aria-label="Legal">
+          <a href="/privacy-policy.html">Privacy</a>
+          <a href="/terms-and-conditions.html">Terms</a>
+          <a href="/about-us.html#emissions">Our emissions</a>
+          <button type="button" style="color:inherit" onclick="try{localStorage.removeItem('ab-consent')}catch(e){};location.reload()">Cookie settings</button>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-wordmark" aria-hidden="true">Stratum</div>
+  </footer>
+
+  <div class="cookie" role="dialog" aria-live="polite" aria-label="Cookie preferences">
+    <strong>We value your privacy</strong>
+    We use essential cookies to run this site and, with your consent, analytics to improve it. See our <a href="/privacy-policy.html">Privacy Policy</a>.
+    <div class="btn-row">
+      <button class="btn btn--sm" type="button" data-consent="all">Accept all</button>
+      <button class="btn btn--sm btn--ghost" type="button" data-consent="essential">Essential only</button>
+    </div>
+  </div>
+  <button class="to-top" type="button" aria-label="Back to top">{{ icon('arrow-up') }}</button>
+
+  <script src="/js/main.js" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

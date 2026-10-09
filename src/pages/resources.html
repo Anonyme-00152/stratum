@@ -1,0 +1,77 @@
+{% extends "templates/base.html" %}
+{% import "templates/macros.html" as m %}
+{% block title %}Resources hub | Stratum{% endblock %}
+{% block description %}Our latest thinking, analysis, reports, webinars and customer stories on carbon and environmental markets.{% endblock %}
+{% block canonical %}/resources.html{% endblock %}
+{% block content %}
+{{ m.page_hero('Resources', 'Stratum <span class="serif">resources hub</span>', 'Our latest thinking, analysis and customer stories — from the team at the centre of the market.', crumb='Resources', seed=19) }}
+
+<section class="section section--flush-top" data-filter>
+  <div class="container">
+    {% set featured = by_slug['net-zero-standard-v2-what-changes'] %}
+    <div data-reveal>{{ m.post_card(featured, feature=True) }}</div>
+
+    <div class="filters mt-64">
+      <div class="chips" role="group" aria-label="Filter by type">
+        {% for v, l in [('all', 'Everything'), ('blog', 'Articles'), ('report', 'Reports'), ('case-study', 'Case studies')] %}
+        <button class="chip" type="button" data-value="{{ v }}" aria-pressed="{{ 'true' if v == 'all' else 'false' }}">{{ l }}</button>
+        {% endfor %}
+      </div>
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+        <span class="mono muted" data-count-out aria-live="polite"></span>
+        <label class="search"><span class="sr-only">Search resources</span>{{ icon('search') }}<input type="search" placeholder="Search resources…"></label>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      {% for a in articles if a.slug != featured.slug %}{% if loop.index <= 60 %}{{ m.post_card(a) }}{% endif %}{% endfor %}
+    </div>
+    <p class="empty" hidden>Nothing matches that search. Try a broader term.</p>
+  </div>
+</section>
+
+<section class="section section--alt" id="events">
+  <div class="container">
+    <div class="section-head section-head--row">
+      <div><span class="eyebrow">Webinars &amp; events</span><h2 class="h2" data-split>Tune in to <span class="serif">the experts</span></h2></div>
+    </div>
+    <div class="grid grid-3" data-stagger>
+      {% for d, kind, t, img in EVENTS %}
+      <article class="post">
+        <div class="post__media"><img src="/img/{{ img }}-sm.webp" alt="" loading="lazy"><span class="tag tag--dark">{{ kind }}</span></div>
+        <div class="post__body">
+          <div class="post__meta"><span>{{ d|date }}</span><i></i><span>{{ 'On demand' if kind == 'Webinar' else 'London' }}</span></div>
+          <h3>{{ t }}</h3>
+          <div class="post__foot"><a class="link-arrow" href="/contact-us.html">{{ 'Request the recording' if kind == 'Webinar' else 'Get in touch' }} {{ icon('arrow') }}</a></div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="newsletter">
+  <div class="container">
+    <div class="cta" data-reveal="scale">
+      <div class="hero__topo"><canvas data-topo="dark" data-seed="27" data-levels="10"></canvas></div>
+      <div class="cta__grid">
+        <div>
+          <span class="eyebrow">Newsletter</span>
+          <h2 class="h2 mt-16">The market briefing, <span class="serif">monthly</span></h2>
+          <p>Prices, policy and supply signals from our analysts — plus first access to new reports and events.</p>
+          <form class="newsletter" data-newsletter novalidate>
+            <label class="sr-only" for="nl-email">Work email</label>
+            <input class="input" id="nl-email" type="email" placeholder="you@company.com" autocomplete="email" required>
+            <button class="btn btn--accent" type="submit">Subscribe</button>
+          </form>
+          <p class="newsletter-msg" aria-live="polite"></p>
+        </div>
+        <div class="cta__side">
+          <div>{{ icon('check') }}<span>One email a month, no spam</span></div>
+          <div>{{ icon('check') }}<span>Unsubscribe at any time</span></div>
+          <div>{{ icon('check') }}<span>Read by sustainability, procurement and finance leads</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
